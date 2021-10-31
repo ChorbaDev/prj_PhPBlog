@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: antiquewhite;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+header {
+    background: #7c2311;
+    height: 70px;
+
+}
+
+header * {
+    color: white;
+}
+header h1 i{
+    color: rgb(211, 46, 0);
+    padding: 4px;
+}
+
+header .logo {
+    float: left;
+    height: inherit;
+    margin-left: 2em;
+    font-family: 'Roboto', sans-serif;
+}
+
+header .logo-txt {
+    margin: 9px;
+
+}
+
+.nav {
+    font-family: 'Roboto', sans-serif;
+
+}
+
+header ul {
+    float: right;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: inherit;
+}
+
+header ul li {
+    float: left;
+    position: relative;
+    height: inherit;
+}
+
+header ul li i.fa-chevron-down {
+    font-size: 0.8em;
+}
+
+header ul li ul {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 180px;
+    display: none;
+    height: auto;
+}
+
+header ul li ul li {
+    width: 100%;
+}
+
+header ul li ul li a {
+    padding: 10px;
+    color: #3F3F3FFF;
+    background: #eeeeee;
+}
+
+header ul li ul li a.deconnexion {
+    color: rgb(211, 46, 0);
+}
+
+header ul li ul li a:hover {
+    background: #AFB1B3;
+}
+
+header ul li:hover ul {
+    display: block;
+}
+
+header ul li a {
+    display: block;
+    padding: 24px;
+    font-size: 1.1em;
+    text-decoration: none;
+    height: 100%;
+
+}
+
+header ul li a:hover {
+    background: #5d2110;
+    transition: 0.3s;
+}
+
+header .menu-switch {
+    display: none;
+}

@@ -30,7 +30,6 @@ class redacteur{
   public final function getPseudo(){
     return $this->pseudo;
   }
-}
   //setters
   public function setNom($nom){
     $this->nom=$nom;
