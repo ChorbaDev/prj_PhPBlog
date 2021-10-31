@@ -1,0 +1,48 @@
+@import "guiStyle.css";
+
+.form-content {
+  width: 30%;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+
+}
+
+.form-content .form-title {
+  text-align: center;
+}
+
+.form-content form div {
+  margin-bottom: 10px;
+}
+
+.form-content form p {
+  text-align: center;
+}
+
+.form-content form p a {
+  text-decoration: underline;
+}
+.text-input {
+  padding: .7rem 1rem;
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  outline: none;
+  color: #444;
+  line-height: 1.5rem;
+  font-size: 1.2em;
+  font-family: 'Lora', serif;
+}
+.btn {
+  padding: .7rem 1.3rem;
+  line-height: 1.3rem;
+  background:  #7c2311;
+  color: white;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  font-size: 1.08em;
+  font-family: 'Lora', serif;
+}
