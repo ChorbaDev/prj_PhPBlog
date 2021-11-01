@@ -122,8 +122,12 @@ header .menu-switch {
     }
     header ul li ul li a {
         color: white;
-        background: #9a2914;
+        background: #7b2312;
         padding: 10px 10px 10px 50px;
+    }
+    header ul li ul li a:hover {
+        background: #5d2110;
+        transition: 0.5s;
     }
     header ul li ul li a.deconnexion{
         color: #ff3b00;
