@@ -1,15 +1,14 @@
-
     <div class="logo">
         <h1 class="logo-txt"><i class="fas fa-book-reader"></i>The Blog</h1>
     </div>
-    <i class="fa fa-bars menu-switch"></i>
+    <i class="fa fa-bars menu-switch" onclick="toggleMenu('.nav')"></i>
     <ul class="nav">
         <li><a href="accueil.php">Accueil</a></li>
         <li><a href="..\htmlfiles\apropos.html">A Propos</a></li>
 <!--        <li><a href="#">S'inscrire</a></li>-->
 <!--        <li><a href="#">Se Connecter</a></li>-->
         <li>
-            <a href="#">
+            <a href="#" onclick="toggleMenu('.nav ul')">
                 <i class="fa fa-user"></i>
                 Utilisateur
                 <i class="fa fa-chevron-down"></i>

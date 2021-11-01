@@ -15,7 +15,9 @@ header {
     height: 70px;
 
 }
-
+header .nav{
+    display: block;
+}
 header * {
     color: white;
 }
@@ -36,17 +38,13 @@ header .logo-txt {
 
 }
 
-.nav {
-    font-family: 'Roboto', sans-serif;
-
-}
-
 header ul {
     float: right;
     margin: 0;
     padding: 0;
     list-style: none;
     height: inherit;
+    font-family: 'Roboto', sans-serif;
 }
 
 header ul li {
@@ -86,10 +84,6 @@ header ul li ul li a:hover {
     background: #AFB1B3;
 }
 
-header ul li:hover ul {
-    display: block;
-}
-
 header ul li a {
     display: block;
     padding: 24px;
@@ -106,4 +100,47 @@ header ul li a:hover {
 
 header .menu-switch {
     display: none;
+}
+
+@media only screen and (max-width: 750px) {
+    header{
+        position: relative;
+    }
+    header ul {
+        width:100%;
+        height: auto;
+        background: #9a2914;
+    }
+
+    header ul li {
+        width: 100%;
+    }
+    header ul li ul {
+        position: static;
+        /*display: block;*/
+        width: 100%;
+    }
+    header ul li ul li a {
+        color: white;
+        background: #9a2914;
+        padding: 10px 10px 10px 50px;
+    }
+    header ul li ul li a.deconnexion{
+        color: #ff3b00;
+    }
+    header .nav{
+        display: none;
+    }
+    header .menu-switch {
+        display: block;
+        position:absolute;
+        right: 20px;
+        top: 10px;
+        float: right;
+        font-size: 3em;
+    }
+    header .logo{
+        margin-left: .5em;
+    }
+
 }

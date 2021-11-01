@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../cssfiles/guiAccueil.css">
     <!--    JS-->
     <script type="text/javascript" src="../javascriptfiles/includeHTML.js"></script>
+    <script type="text/javascript" src="../javascriptfiles/toggleScript.js"></script>
 </head>
   <body>
     <header include-html="header.php"></header>
