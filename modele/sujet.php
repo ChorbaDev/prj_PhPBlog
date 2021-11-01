@@ -9,7 +9,8 @@
     private $image;
     private $publie;
 
-    function __construct($idredacteur,$titresujet,$textesujet,$datesujet,$theme,$image,$publie){
+    function __construct($id,$idredacteur,$titresujet,$textesujet,$datesujet,$theme,$image,$publie){
+        $this->id=$id;
         $this->idredacteur=$idredacteur;
         $this->titresujet=$titresujet;
         $this->textesujet=$textesujet;
@@ -51,7 +52,7 @@
     public function setIdRedacteur($idredacteur){
       $this->idredacteur=$idredacteur;
     }
-    public function setTitreSujet($id){
+    public function setTitreSujet($titresujet){
       $this->titresujet=$titresujet;
     }
     public function setTexteSujet($textesujet){

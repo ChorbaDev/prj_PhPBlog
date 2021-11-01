@@ -10,8 +10,9 @@ class redacteur
     private $pseudo;
 
 //constructeur
-    function __construct($nom, $prenom, $mail, $mdp, $pseudo)
+    function __construct($id,$nom, $prenom, $mail, $mdp, $pseudo)
     {
+        $this->id=$id;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->mail = $mail;
