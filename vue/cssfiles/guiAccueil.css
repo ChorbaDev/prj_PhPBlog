@@ -1,1 +1,86 @@
 @import "guiStyle.css";
+
+/*Page wrapper*/
+
+.page-wrapper{
+    padding: 0 50px 50px;
+}
+
+/* Post slider*/
+.title-slider{
+    margin-top: 50px;
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.post{
+    margin: 10px;
+    background-color: white;
+    box-shadow: 0 15px 35px #3232321a,0 5px 15px #0000001a ;
+    transition: transform 0.3s;
+    transform: translate3d(0,-1px,0);
+}
+.post:hover{
+    transform: translate3d(0,-10px,0);
+}
+.post__body{
+    padding: 25px;
+}
+.post__title{
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #000;
+}
+.post__description{
+    color: #444444;
+}
+.posts{
+    position: relative;
+}
+
+
+/*Carousel*/
+
+.carousel{
+    position: relative;
+}
+.carousel, .post{
+    position: relative;
+}
+.carousel__wrapper{
+    transition: transform .3s;
+    transform: translate3d(0,0,0);
+}
+.carousel__wrapper::after{
+    content: '';
+    clear: both;
+    display: table;
+}
+.carousel__post {
+    float: left;
+}
+
+.carousel__next, .carousel__prev{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #FFF url(../images/chevron-right-solid.svg) center center no-repeat;
+    background-size: 20px 20px;
+    border-radius: 50%;
+    top: 50%;
+    margin-top: -20px;
+    right: 0;
+    box-shadow: 0 15px 35px #3232321a,0 5px 15px #0000001a ;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.carousel__next:hover, .carousel__prev:hover{
+    transform: scale(1.2);
+}
+.carousel__prev{
+    background-image: url(../images/chevron-left-solid.svg);
+    right: auto;
+    left: -20px;
+}
