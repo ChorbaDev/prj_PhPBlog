@@ -7,5 +7,4 @@ class ImplRedacteurDAO implements RedacteurDAO{
   public function getByID($id){}
   public function findAll(){}
 }
-
 ?>
