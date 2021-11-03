@@ -23,7 +23,7 @@ session_start();
         <link rel="stylesheet" href="../cssfiles/guiAccueil.css">
     <!--    JS-->
     <script type="text/javascript" src="../javascriptfiles/includeHTML.js"></script>
-    <script type="text/javascript" src="../javascriptfiles/toggleScript.js"></script>
+
     <script type="text/javascript" src="../javascriptfiles/carouselScript.js" async></script>
 </head>
   <body>

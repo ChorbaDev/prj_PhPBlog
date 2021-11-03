@@ -1,6 +1,9 @@
 @import "guiStyle.css";
 
 /*Page wrapper*/
+body{
+    overflow: hidden;
+}
 
 .page-wrapper{
     padding: 0 50px 50px;

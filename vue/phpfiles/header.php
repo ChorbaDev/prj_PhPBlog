@@ -1,3 +1,4 @@
+<script type="text/javascript" src="../javascriptfiles/toggleScript.js"></script>
    <header>
        <div class="logo">
            <h1 class="logo-txt"><i class="fas fa-book-reader"></i>The Blog</h1>
