@@ -26,6 +26,21 @@ class ImplRedacteurDAO implements RedacteurDAO{
     $update->bindValue(6,$id,PDO::PARAM_INT);
     $update->execute();
   }
+  public function getByMail($mail){
+    $result=$this->conn->connect()->query("select * from elloumi2u_blog.redacteur where adressemail='$mail'");
+    $row=$result->fetch();
+    if(!$row) return null;
+    $redacteur=new Redacteur($row['idredacteur'],$row['nom'],$row['prenom'],$mail,$row['motdepasse'],$row["pseudo"]);
+    return $redacteur;
+  }
+
+  public function getByPseudo($pseudo){
+    $result=$this->conn->connect()->query("select * from elloumi2u_blog.redacteur where pseudo='$pseudo'");
+    $row=$result->fetch();
+    if(!$row) return null;
+    $redacteur=new Redacteur($row['idredacteur'],$row['nom'],$row['prenom'],$row['adressemail'],$row['motdepasse'],$pseudo);
+    return $redacteur;
+  }
   public function delete($id){
     $delete=$this->conn->connect()->prepare("delete from elloumi2u_blog.redacteur where idredacteur=?");
     $delete->bindValue(1,$id,PDO::PARAM_INT);
@@ -34,6 +49,7 @@ class ImplRedacteurDAO implements RedacteurDAO{
   public function getByID($id){
   $result=$this->conn->connect()->query("select * from elloumi2u_blog.redacteur where idredacteur=$id");
   $row=$result->fetch();
+    if(!$row) return null;
   $redacteur=new Redacteur($id,$row['nom'],$row['prenom'],$row['adressemail'],$row['motdepasse'],$row["pseudo"]);
   return $redacteur;
   }

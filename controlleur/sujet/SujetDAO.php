@@ -1,5 +1,5 @@
 <?php
-include_once "../DAO.php";
+include_once "/DAO.php";
 interface SujetDAO extends DAO
 {
     public function findAll();

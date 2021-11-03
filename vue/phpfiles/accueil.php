@@ -1,4 +1,7 @@
 <!doctype html>
+<?php
+session_start();
+?>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -24,7 +27,9 @@
     <script type="text/javascript" src="../javascriptfiles/carouselScript.js" async></script>
 </head>
   <body>
-    <header include-html="header.php"></header>
+  <?php
+  include "header.php";
+  ?>
 <!--  Page Wrapper-->
     <div class="page-wrapper">
 <!--        Carousel-->

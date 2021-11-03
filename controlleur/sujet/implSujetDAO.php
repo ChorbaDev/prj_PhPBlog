@@ -15,6 +15,8 @@ class implSujetDAO implements SujetDAO{
         $create->bindValue(6,$object->getImage(),PDO::PARAM_STR);
         $create->bindValue(7,$object->getPublie(),PDO::PARAM_BOOL);
         $create->execute();
+
+        //if()
     }
 
     public function update($id, $object)

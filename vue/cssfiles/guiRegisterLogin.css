@@ -36,6 +36,7 @@
   font-size: 1.2em;
   font-family: 'Lora', serif;
 }
+
 .btn {
   padding: .7rem 1.3rem;
   line-height: 1.3rem;
@@ -44,5 +45,55 @@
   border: 1px solid transparent;
   border-radius: .25rem;
   font-size: 1.08em;
-  font-family: 'Lora', serif;
+  display: block;
+  width: 100%;
+  font-family: 'Ubuntu', serif;
 }
+.form-control{
+  position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+.form-control i{
+  position: absolute;
+  top: 35px;
+  right: 10px;
+  visibility: hidden;
+}
+.form-control small{
+  position: absolute;
+  visibility: hidden;
+}
+.form-control.success input{
+  border-color: #2ecc71;
+}
+.form-control.success i.fa-check-circle{
+  visibility: visible;
+  color: #2ecc71;
+}
+.form-control.error input{
+  border-color: #e74c3c;
+}
+.form-control.error i.fa-exclamation-circle{
+  visibility: visible;
+  color: #e74c3c;
+}
+
+.form-control.error small{
+  visibility: visible;
+  color:#e74c3c ;
+}
+/*
+a faire apres back end
+#toggle{
+  position: absolute;
+  top: 50%;
+  right:20px;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background: url("");
+  background-size: cover;
+  cursor: pointer;
+}
+*/
