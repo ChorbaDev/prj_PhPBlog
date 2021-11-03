@@ -16,22 +16,30 @@
                    //session_start();
                    if(isset($_SESSION['pseudo'])){
                        echo $_SESSION['pseudo'];
-                       echo"
-                           <ul>
-                            <li><a href='#'>Tableau de Bord</a></li>
-                            <li><a href='deconnexion.php' class='Deconnexion'>Se Déconnecter</a></li>
-                           </ul>";
+
                    }
-                    else{
-                        echo "Utilisateur";
-                        echo"
-                           <ul>
-                            <li><a href='login.php' class='connexion'>Se Connecter</a></li>
-                           </ul>";
-                    }
+                   else{
+                       echo "Utilisateur";
+                   }
                    ?>
                    <i class="fa fa-chevron-down"></i>
                </a>
+               <?php
+               //session_start();
+               if(isset($_SESSION['pseudo'])){
+                   echo"
+                           <ul>
+                            <li><a href='#'>Tableau de Bord</a></li>
+                            <li><a href='deconnexion.php' class='deconnexion'>Se Déconnecter</a></li>
+                           </ul>";
+               }
+               else{
+                   echo"
+                           <ul>
+                            <li><a href='login.php' class='connexion'>Se Connecter</a></li>
+                           </ul>";
+               }
+               ?>
            </li>
        </ul>
    </header>
