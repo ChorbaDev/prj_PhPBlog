@@ -87,3 +87,37 @@ body{
     right: auto;
     left: -20px;
 }
+.carousel__pagination{
+    position: absolute;
+    bottom: -10%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    display: block;
+}
+.carousel__pagination__button{
+    background-color: white;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin:0 3px;
+    box-shadow: 0 2px 5px #3232321a;
+    transition: transform 0.3s;
+    cursor:pointer;
+}
+
+.carousel__pagination__button:hover{
+    transform: scale(1.4);
+}
+
+.carousel__pagination__button--active{
+    transform: scale(1.4);
+}
+
+@media only screen and (max-width: 750px) {
+    .carousel__pagination{
+        display: none;
+    }
+
+}
