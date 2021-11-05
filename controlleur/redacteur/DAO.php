@@ -1,6 +1,6 @@
 <?php
 
-interface DAO
+interface daof
 {
     public function create($object);
     public function update($aRemplacer,$par);
