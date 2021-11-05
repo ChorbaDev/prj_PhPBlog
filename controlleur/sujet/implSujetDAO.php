@@ -1,9 +1,12 @@
 <?php
-include_once "ThemeDAO.php";
+include_once "SujetDAO.php";
 include_once "../../modele/connexion.php";
 include_once "../../modele/sujet.php";
 class implSujetDAO implements SujetDAO{
-
+    private $conn;
+    public function __construct(){
+        $this->conn=new connexion();
+    }
     public function create($object)
     {
         $create=$this->conn->connect()->prepare("insert into elloumi2u_blog.sujet(idredacteur,titresujet,textesujet,datesujet,theme,image,publie) values(?,?,?,?,?,?,?)");
@@ -57,6 +60,17 @@ class implSujetDAO implements SujetDAO{
         $row=$result->fetch();
         $sujet=new Sujet($id,$row['idredacteur'],$row['titresujet'],$row['textesujet'],$row['datesujet'],$row['theme'],$row['image'],$row['publie']);
         return $sujet;
+    }
+
+    public function getByIdRedacteur($id)
+    {
+        $arrRedacteur=[];
+        $arr=$this->findAll();
+        foreach($arr as $sujet){
+            if($sujet->getIdRedacteur()==$id)
+                array_push($arrRedacteur,$sujet);
+        }
+        return $arrRedacteur;
     }
 }
 ?>

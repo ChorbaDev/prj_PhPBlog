@@ -1,3 +1,37 @@
+<?php
+session_start();
+include_once "../../controlleur/redacteur/implRedacteurDAO.php";
+require_once "submitLogin.php";
+$mail='';
+$mdp='';
+$err='';
+if(isset($_POST['Connexion'])){
+    $mail=$_POST['mail'];
+    $mdp=$_POST['mdp'];
+    $verified=verifier($mail,$mdp);
+    if($verified){
+        $impl=new ImplRedacteurDAO();
+        $ok=$impl->redacteurExiste($mail,$mdp);
+        echo "<script type='text/javascript'>
+                $ok;
+            </script>";
+        if($impl->redacteurExiste($mail,$mdp)){
+            $_SESSION['pseudo']=$impl->getByMail($mail)->getPseudo();
+            header('Location: accueil.php');
+        }
+        else {
+            echo '<script type="text/javascript">
+            alert("Ce compte n\'existe pas!");
+            </script>';
+            $err=$err."Ce compte n'existe pas!<br>";
+        }
+    }else{
+        if(!verifMdp($mdp)) $err=$err."Le mot de passe ne doit pas etre vide<br>";
+        else $err=$err."Vérifier votre mail<br>";
+    }
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -16,26 +50,39 @@
   </head>
 
   <body>
-      <header include-html="header.php"></header>
-  </body>
+  <?php
+    include "header.php";
+  ?>
+  <center>
+      <noscript>
+          <?php
+          echo $err;
+          ?>
+      </noscript>
+  </center>
   <div class="form-content">
-    <form action="login.php" method="post">
-      <h2 class="form-title">Se Connecter</h2>
-      <div>
-        <label>Adresse mail</label>
-        <input type="email" name="mail" class="text-input">
-      </div>
-      <div>
-        <label>Mot de passe</label>
-        <input type="password" name="mdp" class="text-input">
-      </div>
-      <div>
-        <button type="submit" name="Connexion" class="btn">Register</button>
-      </div>
-      <p>Vous n'avez pas un compte? <a href="signup.php">Créer un compte</a></p>
-    </form>
+      <form action="login.php" method="post">
+          <h2 class="form-title">Se Connecter</h2>
+          <div class="form-control">
+              <label>Adresse mail</label>
+              <input type="email" name="mail" id="mail" value=" <?php echo $mail; ?>" class="text-input">
+              <i class="fas fa-check-circle"></i>
+              <i class="fas fa-exclamation-circle"></i>
+              <small></small>
+          </div>
+          <div class="form-control pass">
+              <label>Mot de passe</label>
+              <input type="password" name="mdp" id="mdp" class="text-input">
+              <i class="fas fa-check-circle"></i>
+              <i class="fas fa-exclamation-circle"></i>
+              <small></small>
+          </div>
+          <div>
+              <input type="submit" value="Connexion" name="Connexion" id="Connexion" class="btn">
+          </div>
+          <p>Vous n'avez pas un compte? <a href="signup.php">Créer un compte</a></p>
+      </form>
   </div>
-  <script>
-      includeHTML();
-  </script>
+  </body>
+  <script type="text/javascript" src="../javascriptfiles/login.js"></script>
 </html>

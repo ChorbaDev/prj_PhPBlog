@@ -62,5 +62,11 @@ class ImplRedacteurDAO implements RedacteurDAO{
     }
     return $arr;
   }
+  public function redacteurExiste($mail,$mdp){
+    $result=$this->conn->connect()->query("select * from elloumi2u_blog.redacteur where (adressemail='$mail') and (motdepasse='$mdp')");
+    $row=$result->fetch();
+    if($row) return true;
+    return false;
+  }
 }
 ?>

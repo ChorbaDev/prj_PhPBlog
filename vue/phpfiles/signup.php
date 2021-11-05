@@ -2,42 +2,47 @@
 session_start();
 include_once "../../controlleur/redacteur/implRedacteurDAO.php";
 include_once "../../modele/redacteur.php";
+require_once "submitSignUp.php";
 $pseudo='';
 $nom='';
 $prenom='';
 $mail='';
 $mdp='';
+$err='';
+$confMdp='';
 if(isset($_POST["submit"])){
     $pseudo=$_POST['pseudo'];
+    $mail=$_POST['mail'];
     $nom=$_POST['nom'];
     $prenom=$_POST['prenom'];
-    $mail=$_POST['mail'];
     $mdp=$_POST['mdp'];
-    $verified='<script type="text/javascript" src="../javascriptfiles/signup.js">verif()</script>';
+    $confMdp=$_POST['mdpC'];
+    $verified=verifier($pseudo,$nom,$prenom,$mail,$mdp,$confMdp);
     if($verified){
         $redacteur=new Redacteur(0,$nom,$prenom,$mail,$mdp,$pseudo);
         $impl=new ImplRedacteurDAO();
         if($impl->getByMail($mail)!=NULL){
-            echo"<script type='text/javascript'>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Cette mail existe déja!',
-                });
-                </script>";
+            echo "<script type='text/javascript'>
+            alert('Cette mail existe déja!');
+            </script>";
+            $err=$err."Cette mail existe déja!<br>";
         }else if($impl->getByPseudo($pseudo)!=NULL){
-            echo"<script type='text/javascript'>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Ce pseudo existe déja!',
-                });
-                </script>";
+            echo "<script type='text/javascript'>
+                alert('Ce pseudo existe déja!');
+            </script>";
+            $err=$err."Ce pseudo existe déja!<br>";
         }else{
             $impl->create($redacteur);
             $_SESSION['pseudo']=$pseudo;
             header('Location: accueil.php');
         }
+    }else{
+        if(!verifPseudo($pseudo)) $err=$err."Le champ pseudo est obligatoire!<br>";
+        if(!verifNom($nom)) $err=$err."Vérifier votre nom!<br>";
+        if(!verifPrenom($prenom)) $err=$err."Vérifier votre prénom!<br>";
+        if(!verifMail($mail)) $err=$err."Vérifier votre mail!<br>";
+        if(!verifMdp($mdp))$err=$err."Votre mot de passe est faible!<br>";
+        if(!verifConfMdp($confMdp,$mdp))$err=$err."Vérifier le champ de vérification de mot de passe!<br>";
     }
 }
 ?>
@@ -52,12 +57,11 @@ if(isset($_POST["submit"])){
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-
     <!--    CSS-->
     <link rel="stylesheet" href="../cssfiles/guiRegisterLogin.css">
     <!--    JS-->
       <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript" src="../javascriptfiles/includeHTML.js"></script>
+      <script type="text/javascript" src="../javascriptfiles/includeHTML.js"></script>
       <script src="sweetalert2.all.min.js"></script>
       <script src="sweetalert2.min.js"></script>
       <link rel="stylesheet" href="sweetalert2.min.css">
@@ -66,10 +70,18 @@ if(isset($_POST["submit"])){
   <?php
     include "header.php";
   ?>
+  <center>
+      <noscript>
+          <?php
+          echo $err;
+          ?>
+      </noscript>
+  </center>
+
 
     <div class="form-content">
       <form class="form" action="" method="post">
-        <h2 class="form-title">Register</h2>
+        <h2 class="form-title">S'inscrire</h2>
         <div class="form-control">
           <label>Pseudo</label>
           <input type="text" id="pseudo" name="pseudo" value="<?php echo $pseudo?>" class="text-input">
@@ -110,18 +122,18 @@ if(isset($_POST["submit"])){
         </div>
         <div class="form-control">
           <label>Confirmation de Mot de passe</label>
-          <input type="password" id="mdpConf" class="text-input">
+          <input type="password" id="mdpConf" name="mdpC" class="text-input">
             <i class="fas fa-check-circle"></i>
             <i class="fas fa-exclamation-circle"></i>
             <small></small>
         </div>
         <div>
-          <input type="submit" id="register" value="Register" name="submit" class="btn" id="register">
+          <input type="submit" id="register" value="Créer nouveau compte" name="submit" class="btn" id="register">
         </div>
-        <p>Or <a href="login.php">Sign In</a></p>
+        <p>Ou <a href="login.php">Se connecter</a></p>
       </form>
     </div>
+
   </body>
-  <script>includeHTML();</script>
   <script type="text/javascript" src="../javascriptfiles/signup.js"></script>
 </html>

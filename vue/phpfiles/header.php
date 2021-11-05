@@ -1,7 +1,4 @@
 <script type="text/javascript" src="../javascriptfiles/toggleScript.js"></script>
-<?php
-session_start();
-?>
 <header>
     <div class="logo">
         <h1 class="logo-txt"><i class="fas fa-book-reader"></i>The Blog</h1>
@@ -20,7 +17,8 @@ session_start();
                     <i class="fa fa-chevron-down"></i>
                 </a>
                 <ul>
-                    <li><a href="#">Tableau de Bord</a></li>
+                    <li><a href="dashboard.php">Tableau de Bord</a></li>
+                    <li><a href="parametre.php">Paramètres</a></li>
                     <li><a href="deconnexion.php" class="deconnexion">Se Déconnecter</a></li>
                 </ul>
             </li>
