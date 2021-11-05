@@ -25,6 +25,7 @@ class Carousel {
         this.root.setAttribute('tabindex','0')
         this.root.appendChild(this.wrapper)
         this.element.appendChild(this.root)
+        this.moveCallbacks=[]
         this.posts = children.map((child) => {
             let post = this.createDivWithClass('carousel__post')
             post.appendChild(child)
@@ -72,12 +73,19 @@ class Carousel {
         let pagination = this.createDivWithClass('carousel__pagination')
         let buttons=[]
         this.root.appendChild(pagination)
-        for(let i = 0; i <this.posts.length; i+=this.slidesToScroll){
+        for(let i = 0; i <this.posts.length; i+=this.options.slidesToScroll){
             let button=this.createDivWithClass('carousel__pagination__button')
             button.addEventListener('click',()=>this.goToPost(i))
             pagination.appendChild(button)
             buttons.push(button)
         }
+        this.onMove(index=>{
+            let activeButton=buttons[Math.floor(index/ this.options.slidesToScroll)]
+            if(activeButton){
+                buttons.forEach(button=>button.classList.remove('carousel__pagination__button--active'))
+                activeButton.classList.add('carousel__pagination__button--active')
+            }
+        })
 
     }
 
@@ -102,7 +110,16 @@ class Carousel {
         let translateX= index * -100 / this.posts.length
         this.wrapper.style.transform='translate3d('+ translateX +'%,0,0)'
         this.currentPost= index
+        this.moveCallbacks.forEach(cb=>cb(index))
 
+    }
+
+    /**
+     *
+     * @param {Carousel~moveCallbacks}cb
+     */
+    onMove(cb){
+        this.moveCallbacks.push(cb)
     }
 
     onWindowResize(){
@@ -146,11 +163,15 @@ class Carousel {
 
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-
+let onReady=function(){
     new Carousel(document.querySelector('#carousel1'), {
         slidesToScroll: 2,
         slidesVisible: 3,
         pagination:true
     })
-})
+}
+
+if (document.readyState!=='loading'){
+    onReady()
+}
+document.addEventListener('DOMContentLoaded', onReady)
