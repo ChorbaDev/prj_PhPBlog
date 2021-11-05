@@ -1,6 +1,6 @@
 <?php
 include_once 'DAO.php';
-interface RedacteurDAO extends daof
+interface RedacteurDAO extends dao
 {
   public function findAll();
   public function getByID($id);
