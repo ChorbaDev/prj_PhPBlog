@@ -27,6 +27,11 @@ body{
 .post:hover{
     transform: translate3d(0,-10px,0);
 }
+.post img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
 .post__body{
     padding: 25px;
 }

@@ -37,36 +37,54 @@ session_start();
             <h1 class="title-slider">Nouveau Contenu</h1>
             <div id="carousel1">
                 <div class="post">
+                    <div class="post__image">
+                        <img src="../images/chevron-left-solid.svg" alt="">
+                    </div>
                     <div class="post__body">
                         <div class="post__title">1</div>
                         <div class="post__desc">azdazda</div>
                     </div>
                 </div>
                 <div class="post">
+                    <div class="post__image">
+                        <img src="../images/chevron-left-solid.svg" alt="">
+                    </div>
                     <div class="post__body">
                         <div class="post__title">2</div>
                         <div class="post__desc">feazf</div>
                     </div>
                 </div>
                 <div class="post">
+                    <div class="post__image">
+                        <img src="../images/chevron-left-solid.svg" alt="">
+                    </div>
                     <div class="post__body">
                         <div class="post__title">3</div>
                         <div class="post__desc">fezfzeze</div>
                     </div>
                 </div>
                 <div class="post">
+                    <div class="post__image">
+                        <img src="../images/chevron-left-solid.svg" alt="">
+                    </div>
                     <div class="post__body">
                         <div class="post__title">4</div>
                         <div class="post__desc">fezfzeze</div>
                     </div>
                 </div>
                 <div class="post">
+                    <div class="post__image">
+                        <img src="../images/chevron-left-solid.svg" alt="">
+                    </div>
                     <div class="post__body">
                         <div class="post__title">5</div>
                         <div class="post__desc">fezfzeze</div>
                     </div>
                 </div>
                 <div class="post">
+                    <div class="post__image">
+                        <img src="../images/chevron-left-solid.svg" alt="">
+                    </div>
                     <div class="post__body">
                         <div class="post__title">6</div>
                         <div class="post__desc">fezfzeze</div>
