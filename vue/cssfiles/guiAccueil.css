@@ -1,12 +1,10 @@
 @import "guiStyle.css";
 
 /*Page wrapper*/
-body{
-    overflow: hidden;
-}
 
 .page-wrapper{
     padding: 0 50px 50px;
+    overflow: hidden;
 }
 
 /* Post slider*/
@@ -24,10 +22,13 @@ body{
     transition: transform 0.3s;
     transform: translate3d(0,-1px,0);
 }
-.post:hover{
+.post a:hover{
+    color: #9a2914;
+}
+.wrapper .post:hover{
     transform: translate3d(0,-10px,0);
 }
-.post img{
+.wrapper .post .post__image img{
     display: block;
     width: 100%;
     height: auto;
@@ -94,7 +95,7 @@ body{
 }
 .carousel__pagination{
     position: absolute;
-    bottom: -10%;
+    bottom: -5%;
     left: 0;
     right: 0;
     text-align: center;
@@ -118,6 +119,91 @@ body{
 
 .carousel__pagination__button--active{
     transform: scale(1.4);
+}
+/*CONTENU post*/
+.content{
+
+    width: 100%;
+    margin: 100px auto 30px;
+
+}
+.content .content__main{
+    width: 70%;
+    float: left;
+
+}
+
+.content .content__main .post{
+    width: 95%;
+    height: 270px;
+    margin: 10px auto;
+    border-radius: 5px;
+    background: white;
+    position: relative;
+}
+.content .content__main .post .lire{
+    position: absolute;
+    bottom: 5%;
+    right: 2%;
+}
+.content .content__main .post .lire:hover{
+    color:white;
+}
+.content .content__main .post .post__image{
+    width: 40%;
+    height: 100%;
+    float: left;
+}
+.content .content__main .post .post__image img{
+    height: 100%;
+    width: 100%;
+    border-radius: 1%;
+}
+.content .content__main .post .post__preview{
+    width: 60%;
+    padding: 10px;
+    float: right;
+}
+.content .content__main .post__titre__recent{
+    margin: 2% 2% 2% 5%;
+
+}
+
+/*CONTENU sidebar*/
+.content .sidebar{
+    width: 30%;
+    float: left;
+    height: 300px;
+}
+.content .sidebar .section{
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.content .sidebar .section__titre{
+    margin: 4% 0 4% 0;
+}
+.content .sidebar .section.search{
+    margin-top: 15%;
+
+}
+.content .sidebar .section.theme ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid lightgray;
+}
+.content .sidebar .section.theme ul li a{
+    display: block;
+    padding: 3%;
+    border-bottom:1px solid lightgray;
+    transition: all .3s;
+}
+.content .sidebar .section.theme ul li a:hover{
+    padding-left: 5%;
+    transition: all .3s;
+    color: #9a2914;
 }
 
 @media only screen and (max-width: 750px) {

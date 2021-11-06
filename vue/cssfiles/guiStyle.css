@@ -9,6 +9,10 @@ body {
     background: antiquewhite;
     font-family: 'Ubuntu', sans-serif;
 }
+a{
+    text-decoration: none;
+    color: inherit;
+}
 
 header {
     background: #7c2311;
@@ -100,6 +104,37 @@ header ul li a:hover {
 
 header .menu-switch {
     display: none;
+}
+
+.clearfix::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.btn{
+    padding: .5rem 1rem;
+    background: #9a2914;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.btn:hover{
+    background: #5d2110;
+    transition: 0.3s;
+}
+
+.text-input{
+    padding: .7rem 1rem;
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    outline: none;
+    color: gray;
+    line-height: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    border:1px solid lightgray;
 }
 
 @media only screen and (max-width: 750px) {
