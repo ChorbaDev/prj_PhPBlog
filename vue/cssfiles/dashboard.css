@@ -1,0 +1,34 @@
+@import "guiStyle.css";
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #d3d3d3;
+
+}
+.depublier{
+    color:orange;
+}
+.edit {
+    color: green;
+}
+
+.supprimer {
+    color: red;
+}
+
+.publier {
+    color: blue;
+}
+.edit:hover,
+.supprimer:hover,
+.publier:hover {
+    text-decoration: underline;
+}
