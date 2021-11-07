@@ -1,6 +1,20 @@
 <!doctype html>
 <?php
 session_start();
+include_once '../../controlleur/sujet/implSujetDAO.php';
+include_once '../../controlleur/redacteur/implRedacteurDAO.php';
+include_once '../../modele/sujet.php';
+
+$implSujetDao = new implSujetDAO();
+$posts=array();
+
+$implRedacDao=new ImplRedacteurDAO();
+if(isset($_POST['recherche-mots'])){
+    echo ($_POST['recherche-mots']);
+    $posts=$implSujetDao->rechercher($_POST['recherche-mots']);
+}
+else
+    $posts = $implSujetDao->findAll();
 ?>
 <html lang="fr">
 <head>
@@ -32,66 +46,43 @@ session_start();
 <?php
 include "header.php";
 ?>
+<?php
+//echo "<pre>", print_r($posts, true), "</pre>";
+?>
 <!--  Page Wrapper-->
 <div class="page-wrapper">
     <!--        Carousel-->
     <div class="wrapper">
         <h1 class="title-slider">Nouveau Contenu</h1>
         <div id="carousel1">
-            <div class="post">
-                <div class="post__image">
-                    <img src="../images/dbbb.png" alt="">
-                </div>
-                <div class="post__body">
-                    <div class="post__title">1</div>
-                    <div class="post__desc">azdazda</div>
-                </div>
-            </div>
-            <div class="post">
-                <div class="post__image">
-                    <img src="../images/dbbb.png" alt="">
-                </div>
-                <div class="post__body">
-                    <div class="post__title">2</div>
-                    <div class="post__desc">feazf</div>
-                </div>
-            </div>
-            <div class="post">
-                <div class="post__image">
-                    <img src="../images/dbbb.png" alt="">
-                </div>
-                <div class="post__body">
-                    <div class="post__title">3</div>
-                    <div class="post__desc">fezfzeze</div>
-                </div>
-            </div>
-            <div class="post">
-                <div class="post__image">
-                    <img src="../images/dbbb.png" alt="">
-                </div>
-                <div class="post__body">
-                    <div class="post__title">4</div>
-                    <div class="post__desc">fezfzeze</div>
-                </div>
-            </div>
-            <div class="post">
-                <div class="post__image">
-                    <img src="../images/dbbb.png" alt="">
-                </div>
-                <div class="post__body">
-                    <div class="post__title">5</div>
-                    <div class="post__desc">fezfzeze</div>
-                </div>
-            </div>
-            <div class="post">
-                <div class="post__image">
-                    <img src="../images/M-Aillerie.jpg" alt="">
-                </div>
-                <div class="post__body">
-                    <div class="post__title">6</div>
-                    <div class="post__desc">fezfzeze</div>
-                </div>
-            </div>
+            <?php foreach ($posts as $post):
+                if ($post instanceof sujet &&  $post->getPublie()==1):
+                    $titre = $post->getTitreSujet();
+                    $date = $post->getDateSujet();
+                    $texte=substr($post->getTexteSujet(),0,100);
+                    $image=$post->getImage();
+                    $nomredac=$implRedacDao->getByID($post->getIdRedacteur())->getPseudo();
+
+                    ?>
+                    <div class="post">
+                        <div class="post__image">
+                            <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="">'; ?>
+                        </div>
+                        <div class="post__body">
+                            <div class="post__title"><?php echo $titre; ?></div>
+                            <div class="post__desc">
+                                <div><i class="far fa-user"><?php echo $nomredac; ?></i>
+                                    <i class="far fa-calendar"><?php echo date(' j/n/Y', strtotime($date)); ?></i>
+                                </div>
+                                <?php echo html_entity_decode($texte.'...')?>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                endif;
+            endforeach;
+            ?>
+
         </div>
     </div>
     <!--        Fin Carousel-->
@@ -100,71 +91,49 @@ include "header.php";
     <div class="content clearfix">
         <div class="content__main">
             <h1 class="post__titre__recent">Dernières Publications</h1>
-            <div class="post">
+            <?php foreach ($posts as $post):
+            if ($post instanceof sujet &&  $post->getPublie()==1):
+            $titre = $post->getTitreSujet();
+            $date = $post->getDateSujet();
+            $publie = $post->getPublie();
+            $texte=substr($post->getTexteSujet(),0,300);
+            $image=$post->getImage();
+            $nomredac=$implRedacDao->getByID($post->getIdRedacteur())->getPseudo();
+            ?>
+            <div class="post clearfix">
                 <div class="post__image">
-                    <img src="../images/M-Aillerie.jpg" alt="">
+                    <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="">'; ?>
                 </div>
                 <div class="post__preview">
-                    <h2><a href="">aillerie waf waf</a></h2>
-                    <i class="far fa-user"></i>
-                    <i class="far calendar"></i>
-                    <p class="preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at excepturi odit omnis soluta voluptatem.</p>
+                    <h2><a href=""><?php echo $titre; ?></a></h2>
+                    <i class="far fa-user"><?php echo $nomredac; ?></i>
+                    <i class="far fa-calendar"><?php echo date(' j/n/Y', strtotime($date)); ?></i>
+                    <p class="preview"><?php echo html_entity_decode($texte.'...')?></p>
                     <a href="" class="btn lire">Lire</a>
                 </div>
             </div>
-            <div class="post">
-                <div class="post__image">
-                    <img src="../images/M-Aillerie.jpg" alt="">
-                </div>
-                <div class="post__preview">
-                    <h2><a href="">aillerie waf waf</a></h2>
-                    <i class="far fa-user"></i>
-                    <i class="far calendar"></i>
-                    <p class="preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at excepturi odit omnis soluta voluptatem.</p>
-                    <a href="" class="btn lire">Lire</a>
-                </div>
-            </div>
-            <div class="post">
-                <div class="post__image">
-                    <img src="../images/M-Aillerie.jpg" alt="">
-                </div>
-                <div class="post__preview">
-                    <h2><a href="">aillerie waf waf</a></h2>
-                    <i class="far fa-user"></i>
-                    <i class="far calendar"></i>
-                    <p class="preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at excepturi odit omnis soluta voluptatem.</p>
-                    <a href="" class="btn lire">Lire</a>
-                </div>
-            </div>
-            <div class="post">
-                <div class="post__image">
-                    <img src="../images/M-Aillerie.jpg" alt="">
-                </div>
-                <div class="post__preview">
-                    <h2><a href="">aillerie waf waf</a></h2>
-                    <i class="far fa-user"></i>
-                    <i class="far calendar"></i>
-                    <p class="preview">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at excepturi odit omnis soluta voluptatem.</p>
-                    <a href="" class="btn lire">Lire</a>
-                </div>
-            </div>
+            <?php
+            endif;
+            endforeach;
+            ?>
         </div>
         <div class="sidebar">
             <div class="section search">
                 <h2 class="section__titre">Rechercher</h2>
-                <form action="" method="post"><input type="text" name="recherche-mots" class="text-input" placeholder="Rechercher"></form>
+                <form action="" method="post"><input type="text" name="recherche-mots" class="text-input"
+                                                     placeholder="Rechercher"></form>
 
             </div>
             <div class="section theme">
                 <h2 class="section__titre">Sujets</h2>
-                    <ul>
-                        <li><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
-                        <li><a href="">6</a></li>
-                    </ul>
+                <ul>
+                    <li><a href="">1</a></li>
+                    <li><a href="">2</a></li>
+                    <li><a href="">3</a></li>
+                    <li><a href="">4</a></li>
+                    <li><a href="">5</a></li>
+                    <li><a href="">6</a></li>
+                </ul>
 
             </div>
         </div>

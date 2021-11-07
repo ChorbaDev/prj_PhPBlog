@@ -6,6 +6,7 @@ interface SujetDAO extends daof
     public function getById($id);
     public function getByIdRedacteur($id);
     public function changePublie($id);
+    public function rechercher($str);
 }
 
 ?>
