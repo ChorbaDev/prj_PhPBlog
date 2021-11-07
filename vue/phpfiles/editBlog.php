@@ -1,3 +1,4 @@
+<!doctype html>
 <?php
     session_start();
     include_once "../../controlleur/sujet/implSujetDAO.php";
@@ -5,10 +6,86 @@
     include_once "../../controlleur/redacteur/implRedacteurDAO.php";
     include_once "../../modele/sujet.php";
     require_once "submitBlog.php";
-    include "manipulerEditBlog.php";
+//    include "manipulerEditBlog.php";
+$retour=0;
+$implT=new ImplThemeDAO();
+$implS=new ImplSujetDAO();
+$implR=new ImplRedacteurDAO();
+$topics=$implT->findAll();
+if(isset($_GET['id']))
+    $id=$_GET['id'];
+$titre="";
+if(isset($_GET['s'])){
+    $implS->delete($id);
+    $retour=1;
+}
+else if(isset($_GET['p'])){
+    $implS->changePublie($id);
+    $retour=1;
+}
+else{
+    $errors=array();
+    if(isset($_SESSION['pseudo']))
+        $idredacteur=$implR->getByPseudo($_SESSION['pseudo'])->getId();
+    $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
+    $currentDate=$date->format('d-m-Y H:i:s');
+    if(isset($_GET['m'])){
+        $titre="Modification d'un blog";
+        $btnValue="Modifier";
+        $post=$implS->getById($id);
+        $title=$post->getTitreSujet();
+        $text=$post->getTexteSujet();
+        $publier=$post->getPublie();
+        $topic_id=$post->getTheme();
+        if(isset($_POST['btn-post'])) {
+            $title=$_POST['title'];
+            $text=$_POST['body'];
+            $topic_id=$_POST['topic_id'];
+            $publier=isset($_POST['published']);
+            verifierChampsPost($errors, $title, $text, $topic_id);
+            if (count($errors) == 0) {
+                unset($_POST["btn-post"]);
+                $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+                $sujet = new Sujet(0, $idredacteur, $title, $text, $currentDate, $topic_id, $image, $publier);
+                $implS->update($id, $sujet);
+                header('Location: dashboard.php');
+            }
+        }
+    }else{
+        $titre="Ajout d'un blog";
+        $btnValue="Ajouter";
+        $title='';
+        $text='';
+        $publier=null;
+        $topic_id=null;
+        if(isset($_POST['btn-post'])){
+            $title=$_POST['title'];
+            $text=$_POST['body'];
+            $topic_id=$_POST['topic_id'];
+            $publier=isset($_POST['published']);
+            verifierChampsPost($errors,$title,$text,$topic_id);
+            if(count($errors)==0){
+                unset($_POST["btn-post"]);
+                $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+                $sujet=new Sujet(0,$idredacteur,$title,$text,$currentDate,$topic_id,$image,$publier);
+                $implS->create($sujet);
+                header('Location: dashboard.php');
+            }
+        }
+    }
+
+}
+if($retour==1)
+    header("Location: ".$_SESSION['url']);
 ?>
-<html>
-<head><title><?php echo $titre ?></title></head>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><?php echo $titre ?></title>
 <link rel="stylesheet" href="../cssfiles/guiEditBlog.css">
 <!--    Font Awesome-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -16,7 +93,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-
+</head>
 <body>
 <?php
 include "header.php";
@@ -71,8 +148,8 @@ include "header.php";
         </div>
 
 <!-- JQuery -->
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--<script-->
+<!--        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
 <!-- Ckeditor -->
 <script
         src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>

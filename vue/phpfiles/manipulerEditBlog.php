@@ -19,7 +19,7 @@ else{
     $errors=array();
     if(isset($_SESSION['pseudo']))
         $idredacteur=$implR->getByPseudo($_SESSION['pseudo'])->getId();
-    $date = new DateTime('now', new DateTimeZone('Europe/Bucharest'));
+    $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
     $currentDate=$date->format('d-m-Y H:i:s');
     if(isset($_GET['m'])){
         $titre="Modification d'un blog";
