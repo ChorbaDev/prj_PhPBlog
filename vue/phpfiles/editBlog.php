@@ -6,7 +6,6 @@
     include_once "../../controlleur/redacteur/implRedacteurDAO.php";
     include_once "../../modele/sujet.php";
     require_once "submitBlog.php";
-//    include "manipulerEditBlog.php";
 $retour=0;
 $implT=new ImplThemeDAO();
 $implS=new ImplSujetDAO();
@@ -45,7 +44,7 @@ else{
             verifierChampsPost($errors, $title, $text, $topic_id);
             if (count($errors) == 0) {
                 unset($_POST["btn-post"]);
-                $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+                $image =file_get_contents($_FILES['image']['tmp_name']);
                 $sujet = new Sujet(0, $idredacteur, $title, $text, $currentDate, $topic_id, $image, $publier);
                 $implS->update($id, $sujet);
                 header('Location: dashboard.php');
@@ -66,7 +65,7 @@ else{
             verifierChampsPost($errors,$title,$text,$topic_id);
             if(count($errors)==0){
                 unset($_POST["btn-post"]);
-                $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+                $image =file_get_contents($_FILES['image']['tmp_name']);
                 $sujet=new Sujet(0,$idredacteur,$title,$text,$currentDate,$topic_id,$image,$publier);
                 $implS->create($sujet);
                 header('Location: dashboard.php');
@@ -120,7 +119,7 @@ include "header.php";
                 </div>
                 <div class="form-control">
                     <label>Image</label>
-                    <input type="file" name="image" class="text-input">
+                    <input type="file" name="image" class="text-input" accept="image/x-png,image/gif,image/jpeg">
                 </div>
                 <div class="form-control">
                     <label>Topic</label>

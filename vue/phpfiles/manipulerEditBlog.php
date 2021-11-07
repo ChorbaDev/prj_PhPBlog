@@ -37,7 +37,10 @@ else{
             verifierChampsPost($errors, $title, $text, $topic_id);
             if (count($errors) == 0) {
                 unset($_POST["btn-post"]);
-                $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+                //$image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+                $image ='';
+                echo $_FILES['image']['tmp_name'];
+                file_put_contents($_FILES['image']['tmp_name'], $image);
                 $sujet = new Sujet(0, $idredacteur, $title, $text, $currentDate, $topic_id, $image, $publier);
                 $implS->update($id, $sujet);
                 header('Location: dashboard.php');

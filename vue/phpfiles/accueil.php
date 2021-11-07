@@ -63,7 +63,7 @@ include "header.php";
                     ?>
                     <div class="post">
                         <div class="post__image">
-                            <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="">'; ?>
+                            <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="" />'; ?>
                         </div>
                         <div class="post__body">
                             <div class="post__title"><?php echo $titre; ?></div>
@@ -99,7 +99,7 @@ include "header.php";
             ?>
             <div class="post clearfix">
                 <div class="post__image">
-                    <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="">'; ?>
+                    <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="" />'; ?>
                 </div>
                 <div class="post__preview">
                     <h2><a href=""><?php echo $titre; ?></a></h2>
