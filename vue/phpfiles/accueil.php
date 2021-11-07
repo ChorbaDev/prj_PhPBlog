@@ -7,10 +7,10 @@ include_once '../../modele/sujet.php';
 
 $implSujetDao = new implSujetDAO();
 $posts=array();
-
 $implRedacDao=new ImplRedacteurDAO();
+$titrePost='Dernières Publications';
 if(isset($_POST['recherche-mots'])){
-    echo ($_POST['recherche-mots']);
+    $titrePost='Résultat de recherche pour : '.$_POST['recherche-mots'];
     $posts=$implSujetDao->rechercher($_POST['recherche-mots']);
 }
 else
@@ -90,7 +90,7 @@ include "header.php";
     <!--        Contenu-->
     <div class="content clearfix">
         <div class="content__main">
-            <h1 class="post__titre__recent">Dernières Publications</h1>
+            <h1 class="post__titre__recent"><?php echo $titrePost ?></h1>
             <?php foreach ($posts as $post):
             if ($post instanceof sujet &&  $post->getPublie()==1):
             $titre = $post->getTitreSujet();
