@@ -77,7 +77,7 @@ include "header.php";
 <script
         src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
 <!-- Custom Script -->
-<script src="../javascriptfiles/script.js"></script>
+<script src="../javascriptfiles/textAreaScript.js"></script>
 
 </body>
 </html>
