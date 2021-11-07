@@ -25,6 +25,7 @@
 include "header.php";
 ?>
 <table>
+
     <thead>
     <tr>
         <th>Titre</th>
@@ -50,7 +51,7 @@ include "header.php";
                 <td> <a href="editBlog.php?m&id='.$id.'" class="edit" >éditer</a> </td>
                 <td> <a href="editBlog.php?s&id='.$id.'" class="supprimer" >supprimer</a> </td>
                   ';
-            if($publie==1)
+            if($publie!=1)
                 echo '<td> <a href="editBlog.php?p&id='.$id.'" class="publier" >publier</a> </td>';
             else
                 echo '<td> <a href="editBlog.php?p&id='.$id.'" class="depublier" >dépublier</a> </td>';

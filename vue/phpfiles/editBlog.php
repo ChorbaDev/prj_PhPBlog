@@ -1,31 +1,15 @@
 <?php
     session_start();
     include_once "../../controlleur/sujet/implSujetDAO.php";
-    $retour=0;
-    if(isset($_GET['id']))
-    $id=$_GET['id'];
-    $titre="";
-    $impl=new ImplSujetDAO();
-    if(isset($_GET['s'])){
-        $impl->delete($id);
-        $retour=1;
-    }
-    else if(isset($_GET['p'])){
-        $impl->changePublie($id);
-        $retour=1;
-    }
-    else if(isset($_GET['m'])){
-        $titre="Edition d'un blog";
-        $post=$impl->getById($id);
-    }else{
-        $titre="Ajout d'un blog";
-    }
-    if($retour==1) header("Location: ".$_SESSION['url']);
+    include_once "../../controlleur/theme/implThemeDAO.php";
+    include_once "../../controlleur/redacteur/implRedacteurDAO.php";
+    include_once "../../modele/sujet.php";
+    require_once "submitBlog.php";
+    include "manipulerEditBlog.php";
 ?>
 <html>
 <head><title><?php echo $titre ?></title></head>
-<link rel="stylesheet" href="../cssfiles/guiRegisterLogin.css">
-<link rel="stylesheet" href="../cssfiles/dashboard.css">
+<link rel="stylesheet" href="../cssfiles/guiEditBlog.css">
 <!--    Font Awesome-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <!--    Google Fonts-->
@@ -37,5 +21,63 @@
 <?php
 include "header.php";
 ?>
+
+<?php if(count($errors) > 0):?>
+<div class="msg error">
+    <?php foreach ($errors as $error): ?>
+    <li><?php echo $error ?></li>
+    <?php endforeach;?>
+</div>
+<?php endif; ?>
+        <div class="form-content">
+            <h2 class="form-title"><?php echo $titre ?></h2>
+
+            <form action="" method="post" enctype="multipart/form-data">
+                <div>
+                    <label>Title</label>
+                    <input type="text" name="title" value="<?php echo $title ?>" class="text-input">
+                </div>
+                <div class="form-control">
+                    <label>Body</label>
+                    <textarea name="body" id="body"><?php echo $text ?></textarea>
+                </div>
+                <div class="form-control">
+                    <label>Image</label>
+                    <input type="file" name="image" class="text-input">
+                </div>
+                <div class="form-control">
+                    <label>Topic</label>
+                    <select name="topic_id" class="text-input">
+                        <option value=""></option>
+                        <?php foreach ($topics as $topic): ?>
+
+                                <option <?php if (!empty($topic_id) && $topic_id == $topic) echo "selected" ?>
+                                        value="<?php echo $topic ?>"><?php echo $topic ?></option>
+                        <?php endforeach; ?>
+
+                    </select>
+                </div>
+                <div class="form-control">
+                        <label>
+                            <input type="checkbox" name="published" <?php if(!empty($publier)) echo "checked"?>>
+                            Publish
+                        </label>
+                </div>
+                <div>
+                    <button type="submit" name="btn-post" class="btn btn-big"><?php echo $btnValue ?></button>
+                </div>
+            </form>
+
+        </div>
+
+<!-- JQuery -->
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Ckeditor -->
+<script
+        src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
+<!-- Custom Script -->
+<script src="../javascriptfiles/script.js"></script>
+
 </body>
 </html>
