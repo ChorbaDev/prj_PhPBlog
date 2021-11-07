@@ -46,9 +46,6 @@ else
 <?php
 include "header.php";
 ?>
-<?php
-//echo "<pre>", print_r($posts, true), "</pre>";
-?>
 <!--  Page Wrapper-->
 <div class="page-wrapper">
     <!--        Carousel-->
