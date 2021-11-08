@@ -6,11 +6,15 @@
     include_once "../../modele/sujet.php";
     $implR=new ImplRedacteurDAO();
     $impl=new ImplSujetDAO();
+    if(isset($_SESSION['pseudo']))
     $id=$implR->getByPseudo($_SESSION['pseudo'])->getId();
     $posts=$impl->getByIdRedacteur($id);
 ?>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tableau de bord</title>
     <link rel="stylesheet" href="../cssfiles/dashboard.css">
     <!--    Font Awesome-->
@@ -24,8 +28,10 @@
 <?php
 include "header.php";
 ?>
-
-    <a href="editBlog.php?a" class="btn btn-big">Ajouter un blog</a>
+<div class="admin-wrapper">
+    <?php if(isset($_SESSION['admin']))
+        include "adminSideBar.php";
+        ?>
 
 <table>
     <thead>
@@ -63,5 +69,6 @@ include "header.php";
     ?>
     </tbody>
 </table>
+</div>
 </body>
 </html>

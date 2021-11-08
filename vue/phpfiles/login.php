@@ -2,21 +2,22 @@
 session_start();
 include_once "../../controlleur/redacteur/implRedacteurDAO.php";
 require_once "submitLogin.php";
-$mail='';
+$input='';
 $mdp='';
 $ok='';
 $errors=array();
 if(isset($_POST['Connexion'])){
-    $mail=$_POST['mail'];
+    $input=$_POST['mail'];
     $mdp=$_POST['mdp'];
-    verifier($mail,$mdp,$errors);
+    verifier($input,$mdp,$errors);
     if(sizeof($errors)==0){
         $impl=new ImplRedacteurDAO();
-        if($impl->redacteurExiste($mail,$mdp)){
-            if($impl->getByMail($mail))
-                $_SESSION['pseudo']=$impl->getByMail($mail)->getPseudo();
+        if($impl->redacteurExiste($input,$mdp)){
+            if($impl->getByMail($input))
+                $_SESSION['pseudo']=$impl->getByMail($input)->getPseudo();
             else
-                $_SESSION['pseudo']=$mail;
+                $_SESSION['pseudo']=$input;
+                $_SESSION['admin']=$impl->isAdmin($_SESSION['pseudo']);
             header('Location: accueil.php');
         }
         else {
@@ -38,8 +39,6 @@ if(isset($_POST['Connexion'])){
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
         <!--    CSS-->
         <link rel="stylesheet" href="../cssfiles/guiFormulaireRedacteur.css">
-        <!--    JS-->
-        <script type="text/javascript" src="../javascriptfiles/includeHTML.js"></script>
   </head>
 
   <body>
@@ -66,7 +65,7 @@ if(isset($_POST['Connexion'])){
           <h2 class="form-title">Se Connecter</h2>
           <div class="form-control">
               <label>Adresse mail ou Pseudo</label>
-              <input type="text" name="mail" id="mail" value="<?php echo $mail; ?>" class="text-input">
+              <input type="text" name="mail" id="mail" value="<?php echo $input; ?>" class="text-input">
           </div>
           <div class="form-control pass">
               <label>Mot de passe</label>

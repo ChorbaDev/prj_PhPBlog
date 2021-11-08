@@ -68,11 +68,20 @@ class ImplRedacteurDAO implements RedacteurDAO{
     if($row) return true;
     return false;
   }
+
   public function changeAdmin($id)
   {
     $update = $this->conn->connect()->prepare("update elloumi2u_blog.redacteur set admin=(admin-1)* -1 where idredacteur=?");
     $update->bindValue(1, $id, PDO::PARAM_INT);
     $update->execute();
+  }
+
+  public function isAdmin($pseudo)
+  {
+    $result=$this->conn->connect()->query("select * from elloumi2u_blog.redacteur where pseudo='$pseudo'");
+    $row=$result->fetch();
+    if($row['admin']!=null) return true;
+    return false;
   }
 }
 ?>

@@ -4,7 +4,6 @@ session_start();
 include_once '../../controlleur/sujet/implSujetDAO.php';
 include_once '../../controlleur/redacteur/implRedacteurDAO.php';
 include_once '../../modele/sujet.php';
-
 $implSujetDao = new implSujetDAO();
 $posts=array();
 $implRedacDao=new ImplRedacteurDAO();

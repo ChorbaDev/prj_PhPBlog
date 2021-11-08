@@ -1,6 +1,6 @@
 @import "guiStyle.css";
 table {
-    width: 60%;
+    width: 85%;
     border-collapse: collapse;
     font-size: 1.1rem;
     text-align: center;
@@ -11,7 +11,6 @@ td {
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid #d3d3d3;
-
 }
 .depublier{
     color:orange;
@@ -32,17 +31,33 @@ td {
 .publier:hover {
     text-decoration: underline;
 }
-.btn {
-    margin: 30px auto;
-    padding: .7rem 1.3rem;
-    line-height: 1.3rem;
-    background:  #7c2311;
-    color: white;
-    border: 1px solid transparent;
-    text-align: center;
-    border-radius: .25rem;
-    font-size: 1.08em;
+
+.admin-wrapper {
+    display: flex;
+    height: 100% ;
+}
+
+.admin-wrapper .left-sidebar {
+    flex: 2;
+    height: 100%;
+    background: #7c2311;
+}
+.borderTop{
+    border-top: 1px solid black;
+}
+.admin-wrapper .left-sidebar ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    color: aliceblue;
+}
+
+.admin-wrapper .left-sidebar ul li a {
+    padding: 18px;
     display: block;
-    width: 10%;
-    font-family: 'Ubuntu', serif;
+    border-bottom: 1px solid black;
+}
+
+.admin-wrapper .left-sidebar ul li a:hover {
+    background: #7c2320;
 }

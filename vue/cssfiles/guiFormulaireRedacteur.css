@@ -1,5 +1,5 @@
 @import "guiStyle.css";
 @import "CommunEntreFormulaire.css";
-.form-content {
-    width: 60%;
+.form-content,.msg {
+  width: 30%;
 }

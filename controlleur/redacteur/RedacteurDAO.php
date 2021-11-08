@@ -7,6 +7,7 @@ interface RedacteurDAO extends dao
   public function getByMail($mail);
   public function getByPseudo($pseudo);
   public function redacteurExiste($mail,$mdp);
+  public function isAdmin($pseudo);
   public function changeAdmin($id);
 }
 
