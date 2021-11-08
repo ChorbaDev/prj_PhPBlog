@@ -1,14 +1,13 @@
 <?php
-function verifier($mail,$mdp){
-    return   verifMail($mail) && verifMdp($mdp) ;
+function verifier($input,$mdp,&$errors){
+    verifMail($input);
+    verifMdp($mdp) ;
 }
 
-function verifMdp($mdp)
-{
-return (!empty($mdp));
+function verifMdp($mdp){
+    if(empty($mdp)) array_push($errors,"Entrez votre mot de passe");
 }
-function verifMail($mail)
-{
-return filter_var($mail, FILTER_VALIDATE_EMAIL) && !empty($mail);
+function verifMail($input){
+    if(empty($input)) array_push($errors,"Entez votre mail ou pseudo");
 }
 ?>

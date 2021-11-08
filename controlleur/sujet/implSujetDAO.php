@@ -80,7 +80,6 @@ class implSujetDAO implements SujetDAO{
         $update = $this->conn->connect()->prepare("update elloumi2u_blog.sujet set publie=(publie-1)* -1 where idsujet=?");
         $update->bindValue(1, $id, PDO::PARAM_INT);
         $update->execute();
-
     }
     public function rechercher($str)
     {

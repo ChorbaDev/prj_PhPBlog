@@ -24,8 +24,10 @@
 <?php
 include "header.php";
 ?>
-<table>
 
+    <a href="editBlog.php?a" class="btn btn-big">Ajouter un blog</a>
+
+<table>
     <thead>
     <tr>
         <th>Titre</th>

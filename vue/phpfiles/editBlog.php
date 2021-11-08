@@ -24,6 +24,7 @@ else if(isset($_GET['p'])){
 }
 else{
     $errors=array();
+    $image="";
     if(isset($_SESSION['pseudo']))
         $idredacteur=$implR->getByPseudo($_SESSION['pseudo'])->getId();
     $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
@@ -44,6 +45,7 @@ else{
             verifierChampsPost($errors, $title, $text, $topic_id);
             if (count($errors) == 0) {
                 unset($_POST["btn-post"]);
+                if(isset($_POST['image']))
                 $image =file_get_contents($_FILES['image']['tmp_name']);
                 $sujet = new Sujet(0, $idredacteur, $title, $text, $currentDate, $topic_id, $image, $publier);
                 $implS->update($id, $sujet);
@@ -65,6 +67,7 @@ else{
             verifierChampsPost($errors,$title,$text,$topic_id);
             if(count($errors)==0){
                 unset($_POST["btn-post"]);
+                if(isset($_POST['image']))
                 $image =file_get_contents($_FILES['image']['tmp_name']);
                 $sujet=new Sujet(0,$idredacteur,$title,$text,$currentDate,$topic_id,$image,$publier);
                 $implS->create($sujet);
@@ -97,7 +100,6 @@ if($retour==1)
 <?php
 include "header.php";
 ?>
-
 <?php if(count($errors) > 0):?>
 <div class="msg error">
     <?php foreach ($errors as $error): ?>

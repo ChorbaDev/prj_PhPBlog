@@ -18,12 +18,12 @@
                 </a>
                 <ul>
                     <li><a href="dashboard.php">Tableau de Bord</a></li>
-                    <li><a href="parametre.php">Paramètres</a></li>
+                    <li><a href="formulaireRedacteur.php?p">Paramètres</a></li>
                     <li><a href="deconnexion.php" class="deconnexion">Se Déconnecter</a></li>
                 </ul>
             </li>
         <?php else: ?>
-                <li><a href="signup.php">S'inscrire</a></li>
+                <li><a href="formulaireRedacteur.php?c">S'inscrire</a></li>
                 <li><a href="login.php">Se Connecter</a></li>
         <?php endif;?>
 

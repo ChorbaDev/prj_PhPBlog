@@ -1,36 +1,48 @@
 <?php
-    function verifier($pseudo,$nom,$prenom,$mail,$mdp,$confMdp){
-        return verifPseudo($pseudo)&& verifNom($nom) && verifPrenom($prenom) && verifMail($mail) && verifMdp($mdp)  && verifConfMdp($confMdp,$mdp);
+    function verifier($pseudo,$nom,$prenom,$mail,$mdp,$confMdp,&$errors){
+        verifPseudo($pseudo,$errors);
+        verifNom($nom,$errors);
+        verifPrenom($prenom,$errors);
+        verifMail($mail,$errors);
+        verifMdp($mdp,$errors);
+        verifConfMdp($confMdp,$mdp,$errors);
     }
 
-function verifMail($mail)
+function verifMail($mail,&$errors)
 {
-   return filter_var($mail, FILTER_VALIDATE_EMAIL) && !empty($mail);
+   if(!(filter_var($mail, FILTER_VALIDATE_EMAIL) && !empty($mail)) )
+       array_push($errors,"Vérifier votre mail!");
 }
 
-function verifConfMdp($conf,$mdp)
+function verifConfMdp($conf,$mdp,&$errors)
 {
-    return $conf==$mdp;
+    if($conf!=$mdp || empty($conf)) array_push($errors,"Vérifier le champ de vérification de mot de passe!");
 }
 
-function verifMdp($mdp)
+function verifMdp($mdp,&$errors)
 {
-    return (preg_match("/^(?=.*[0-9])(?=.*[!@#$%^&*:;])[a-zA-Z0-9!@#$%^&*:;]{6,16}$/", $mdp));
+    if (!preg_match("/^(?=.*[0-9])(?=.*[!@#$%^&*:;])[a-zA-Z0-9!@#$%^&*:;]{6,16}$/", $mdp)){
+        array_push($errors,"Votre mot de passe est faible:<br>Au moins 1 caractére spécial.<br>Au moins 1 chiffre.<br>Au moins un mot de passe de longuer 6.");
+    }
 }
 
-function verifPrenom($prenom)
+function verifPrenom($prenom,&$errors)
 {
-    return (preg_match("/^[a-zA-Z -çàéèù]+$/", $prenom) && !empty($prenom));
+    if (!preg_match("/^[a-zA-Z -çàéèù]+$/", $prenom) && !empty($prenom)){
+        array_push($errors,"Vérifier votre prénom!");
+    }
 }
 
-function verifNom($nom)
+function verifNom($nom,&$errors)
 {
-    return (preg_match("/^[a-zA-Z -çàéèù]+$/", $nom) && !empty($nom));
+    if (!preg_match("/^[a-zA-Z -çàéèù]+$/", $nom) && !empty($nom)){
+        array_push($errors,"Vérifier votre nom!");
+    }
 }
 
-function verifPseudo($pseudo)
+function verifPseudo($pseudo,&$errors)
 {
-    return !empty($pseudo);
+    if( empty($pseudo)) array_push($errors,'Le champ pseudo est obligatoire!');
 }
 
 ?>
