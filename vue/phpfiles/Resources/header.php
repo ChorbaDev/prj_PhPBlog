@@ -17,15 +17,20 @@
                     <i class="fa fa-chevron-down"></i>
                 </a>
                 <ul>
-                    <li><a href="<?php echo BASE_URL; ?>/vue/phpfiles/Resources/dashboard.php?b">Tableau de Bord</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/vue/phpfiles/Inscription_ModifRedact/formulaireRedacteur.php?p">Paramètres</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/vue/phpfiles/Connexion/deconnexion.php" class="deconnexion">Se Déconnecter</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/vue/phpfiles/Resources/dashboard.php?b">Tableau de Bord</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo BASE_URL; ?>/vue/phpfiles/Inscription_ModifRedact/formulaireRedacteur.php?p">Paramètres</a>
+                    </li>
+                    <li><a href="<?php echo BASE_URL; ?>/vue/phpfiles/Connexion/deconnexion.php" class="deconnexion">Se
+                            Déconnecter</a></li>
                 </ul>
             </li>
         <?php else: ?>
-                <li><a href="<?php echo BASE_URL; ?>/vue/phpfiles/Inscription_ModifRedact/formulaireRedacteur.php?c">S'inscrire</a></li>
-                <li><a href="<?php echo BASE_URL; ?>/vue/phpfiles/Connexion/Login/login.php">Se Connecter</a></li>
-        <?php endif;?>
+            <li><a href="<?php echo BASE_URL; ?>/vue/phpfiles/Inscription_ModifRedact/formulaireRedacteur.php?c">S'inscrire</a>
+            </li>
+            <li><a href="<?php echo BASE_URL; ?>/vue/phpfiles/Connexion/Login/login.php">Se Connecter</a></li>
+        <?php endif; ?>
 
     </ul>
 </header>
