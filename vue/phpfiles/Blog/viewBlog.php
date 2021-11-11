@@ -6,6 +6,8 @@ include_once ROOT_PATH . "/controlleur/reponse/implReponseDAO.php";
 include_once ROOT_PATH . "/modele/sujet.php";
 include_once ROOT_PATH . "/modele/reponse.php";
 
+
+
 $implRepDao = new implReponseDAO();
 $implSujetDao = new implSujetDAO();
 $implRedacDao = new ImplRedacteurDAO();
@@ -82,6 +84,11 @@ $reps = $implRepDao->findAll();
                     </div>
                 </div>
                 <div class="reponse__wrapper">
+                    <div class="rep__ajout">
+                        <label><?php echo 'body'?></label>
+                        <textarea name="body" id="body"><?php echo 'bullshit' ?></textarea>
+
+                    </div>
                     <?php foreach ($reps
 
                     as $rep):
@@ -91,10 +98,7 @@ $reps = $implRepDao->findAll();
                     $dateRep = $rep->getDateRep();
                     $nomredacRep = $implRedacDao->getByID($rep->getIdRedacteur())->getPseudo();
                     ?>
-                    <div class="rep__ajout">
-                        <label>Body</label>
-                        <textarea name="body" id="body"><?php echo $texteRep ?></textarea>
-                    </div>
+
 
                     <div class="rep clearfix">
                         <div class="rep__contenu">
