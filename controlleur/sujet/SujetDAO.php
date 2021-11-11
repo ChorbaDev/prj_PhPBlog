@@ -4,6 +4,7 @@ include_once ROOT_PATH."/controlleur/DAO.php";
 interface SujetDAO extends dao
 {
     public function findAll();
+    public function trending();
     public function getById($id);
     public function getByIdRedacteur($id);
     public function changePublie($id);

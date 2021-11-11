@@ -11,12 +11,16 @@ $implThemeDao = new implThemeDAO();
 $themes=$implThemeDao->findAll();
 $implRedacDao = new ImplRedacteurDAO();
 $titrePost = 'Dernières Publications';
+$noGET=true;
 if (isset($_POST['recherche-mots'])) {
+    $noGET=false;
     $titrePost = 'Résultat de recherche pour : ' . $_POST['recherche-mots'];
     $posts = $implSujetDao->rechercher($_POST['recherche-mots']);
 } else
     $posts = $implSujetDao->findAll();
+$theme=null;
 if(isset($_GET['th'])){
+    $noGET=false;
     $theme=$_GET['th'];
     $posts=$implSujetDao->getByTheme($theme);
 }
@@ -56,7 +60,9 @@ include ROOT_PATH."/vue/phpfiles/Resources/header.php";
     <div class="wrapper">
         <h1 class="title-slider">Nouveau Contenu</h1>
         <div id="carousel1">
-            <?php foreach ($posts as $post):
+            <?php
+            $posts=array_reverse($posts);
+            foreach ($posts as $post):
                 if ($post instanceof sujet && $post->getPublie() == 1):
                     $id = $post->getId();
                     $titre = $post->getTitreSujet();
@@ -98,7 +104,10 @@ include ROOT_PATH."/vue/phpfiles/Resources/header.php";
     <div class="content clearfix">
         <div class="content__main">
             <h1 class="post__titre__recent"><?php echo $titrePost ?></h1>
-            <?php foreach ($posts as $post):
+            <?php
+            if($noGET)
+            $posts=$implSujetDao->trending();
+            foreach ($posts as $post):
                 if ($post instanceof sujet && $post->getPublie() == 1):
                     $id = $post->getId();
                     $titre = $post->getTitreSujet();

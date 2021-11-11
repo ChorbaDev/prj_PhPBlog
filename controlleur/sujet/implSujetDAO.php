@@ -107,5 +107,21 @@ class implSujetDAO implements SujetDAO{
         }
         return $arrTheme;
     }
+
+    public function trending()
+    {
+        $sql="
+            select count(*) as n, idsujet
+            from elloumi2u_blog.reponse
+            group by idsujet
+            order by n desc;
+        ";
+        $result = $this->conn->connect()->query($sql);
+        $arr=array();
+        foreach ($result as $elt){
+            array_push($arr,$this->getById($elt['idsujet']));
+        }
+        return $arr;
+    }
 }
 ?>
