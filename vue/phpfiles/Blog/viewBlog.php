@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "/home/elloumi2u/Projet/path.php";
 include_once ROOT_PATH . "/controlleur/sujet/implSujetDAO.php";
 include_once ROOT_PATH . "/controlleur/redacteur/implRedacteurDAO.php";
@@ -7,10 +8,11 @@ include_once ROOT_PATH . "/modele/sujet.php";
 include_once ROOT_PATH . "/modele/reponse.php";
 
 
-
 $implRepDao = new implReponseDAO();
 $implSujetDao = new implSujetDAO();
 $implRedacDao = new ImplRedacteurDAO();
+$idCo=$implRedacDao->getByPseudo($_SESSION['pseudo'])->getId();
+
 if (isset($_GET['id']) || $implSujetDao->getById($_GET['id'])->getPublie() === 1) {
     $post = $implSujetDao->getById($_GET['id']);
 
@@ -23,13 +25,47 @@ $date = $post->getDateSujet();
 $texte = $post->getTexteSujet();
 $image = $post->getImage();
 $nomredac = $implRedacDao->getByID($post->getIdRedacteur())->getPseudo();
-
+$uri = $_SERVER['PHP_SELF']."?id=$id";
 $posts = array();
 $reps = array();
 
 $posts = $implSujetDao->findAll();
 $reps = $implRepDao->findAll();
+if (isset($_GET['m'])) {
+    $placeHolderRep=$implRepDao->getByID($_GET['idRep'])->getTexteReponse();
+    if (isset($_POST['btn-post'])) {
+        if (!isset($_SESSION['pseudo'])) {
+            header("Location: " . BASE_URL . "/vue/phpfiles/Connexion/Login/login.php");
+        } else {
+            $text = $_POST['body'];
+            if (!$text == null) {
+                $nRep = new reponse(0, $id, $implRedacDao->getByPseudo($_SESSION['pseudo'])->getId(), $date, $text);
+                $implRepDao->update($_GET['idRep'], $nRep);
+                header('Location: ' . $uri);
+            }
+        }
+    }
 
+
+} else if (isset($_GET['d'])){
+    $nRep = new reponse(0, $id, $implRedacDao->getByPseudo($_SESSION['pseudo'])->getId(), $date, $text);
+    $implRepDao->delete($_GET['idRep']);
+    header('Location: ' . $uri);
+} else {
+    $placeHolderRep='';
+    if (isset($_POST['btn-post'])) {
+        if (!isset($_SESSION['pseudo'])) {
+            header("Location: " . BASE_URL . "/vue/phpfiles/Connexion/Login/login.php");
+        } else {
+            $text = $_POST['body'];
+            if (!$text == null) {
+                $nRep = new reponse(0, $id, $implRedacDao->getByPseudo($_SESSION['pseudo'])->getId(), $date, $text);
+                $implRepDao->create($nRep);
+                header('Location: ' . $uri);
+            }
+        }
+    }
+}
 
 ?>
 
@@ -56,6 +92,7 @@ $reps = $implRepDao->findAll();
 
         <!--    CSS-->
         <link rel="stylesheet" href="../../cssfiles/guiViewBlog.css">
+        <link rel="stylesheet" href="../../cssfiles/guiBlog.css">
         <!--    JS-->
         <script type="text/javascript" src="../../javascriptfiles/carouselScript.js" async></script>
     </head>
@@ -84,36 +121,55 @@ $reps = $implRepDao->findAll();
                     </div>
                 </div>
                 <div class="reponse__wrapper">
-                    <div class="rep__ajout">
-                        <label><?php echo 'body'?></label>
-                        <textarea name="body" id="body"><?php echo 'bullshit' ?></textarea>
+                    <div class="rep__ajout__wrapper">
+                        <h2>Donnez votre avis</h2>
+                        <div class="rep__ajout">
+                            <form action="" method="post">
+                                <div>
+                                    <label><?php echo '' ?></label>
+                                    <textarea name="body" id="body"><?php echo $placeHolderRep ?></textarea>
+                                </div>
+                                <div>
+                                    <button type="submit" name="btn-post" class="btn btn-big">Valider</button>
+                                </div>
+                            </form>
+                        </div>
+
 
                     </div>
-                    <?php foreach ($reps
+                    <?php foreach ($reps as $rep):
+                        if ($rep instanceof reponse && $rep->getIdSujet() == $id):
+                            $idRep = $rep->getId();
+                            $idCoRep=$rep->getIdRedacteur();
+                            $texteRep = $rep->getTexteReponse();
+                            $dateRep = $rep->getDateRep();
+                            $nomredacRep = $implRedacDao->getByID($rep->getIdRedacteur())->getPseudo();
+                            ?>
 
-                    as $rep):
-                    if ($rep instanceof reponse && $rep->getIdSujet() == $id):
-                    $idRep = $rep->getId();
-                    $texteRep = $rep->getTexteReponse();
-                    $dateRep = $rep->getDateRep();
-                    $nomredacRep = $implRedacDao->getByID($rep->getIdRedacteur())->getPseudo();
+
+                            <div class="rep clearfix">
+                                <div class="rep__info">
+                                    <i class="far fa-user"><?php echo $nomredacRep; ?></i>
+                                    <i class="far fa-calendar"><?php echo date(' j/n/Y', strtotime($dateRep)); ?></i>
+                                </div>
+                                <div class="rep__contenu">
+                                    <?php echo $texteRep; ?>
+                                </div>
+                                <?php if ($idCo==$idCoRep): ?>
+                                    <div class="modif">
+                                        <a href="<?php echo($uri . '&m&idRep=' . $idRep); ?>">Modifier</a>
+                                    </div>
+                                    <div class="modif">
+                                        <a href="<?php echo($uri . '&d&idRep=' . $idRep); ?>">Modifier</a>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php
+                        endif;
+                    endforeach;
                     ?>
-
-
-                    <div class="rep clearfix">
-                        <div class="rep__info">
-                            <i class="far fa-user"><?php echo $nomredacRep; ?></i>
-                            <i class="far fa-calendar"><?php echo date(' j/n/Y', strtotime($dateRep)); ?></i>
-                        </div>
-                        <div class="rep__contenu">
-                            <?php echo $texteRep; ?>
-                        </div>
-                    </div>
                 </div>
-                <?php
-                endif;
-                endforeach;
-                ?>
+
 
             </div>
         </div>

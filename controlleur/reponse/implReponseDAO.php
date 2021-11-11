@@ -13,10 +13,9 @@ class implReponseDAO implements ReponseDAO
 
     public function create($object)
     {
-        $date=date('Y-m-d H:i:s', strtotime($object->getDateRep()));
         $create=$this->conn->connect()->prepare("insert into elloumi2u_blog.reponse(idsujet,idredacteur,textereponse) values(?,?,?)");
         $create->bindValue(1,$object->getIdSujet(),PDO::PARAM_INT);
-        $create->bindValue(1,$object->getIdRedacteur(),PDO::PARAM_INT);
+        $create->bindValue(2,$object->getIdRedacteur(),PDO::PARAM_INT);
         $create->bindValue(3,$object->getTexteReponse());
         $create->execute();
 
@@ -24,7 +23,6 @@ class implReponseDAO implements ReponseDAO
 
     public function update($id, $object)
     {
-        $date=date('Y-m-d H:i:s', strtotime($object->getDateRep()));
         $update=$this->conn->connect()->prepare("update elloumi2u_blog.reponse set textereponse=? where idreponse=?");
         $update->bindValue(1,$object->getTexteReponse());
         $update->bindValue(2,$id,PDO::PARAM_INT);

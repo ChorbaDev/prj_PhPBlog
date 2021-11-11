@@ -167,6 +167,7 @@
     height: 100%;
     width: 100%;
     border-radius: 1%;
+    object-fit: cover;
 }
 .content .content__main .post .post__preview{
     width: 60%;
