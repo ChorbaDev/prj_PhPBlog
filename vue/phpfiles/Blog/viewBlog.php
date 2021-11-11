@@ -1,4 +1,5 @@
 <?php
+include_once "/home/elloumi2u/Projet/path.php";
 include_once ROOT_PATH . "/controlleur/sujet/implSujetDAO.php";
 include_once ROOT_PATH . "/controlleur/redacteur/implRedacteurDAO.php";
 include_once ROOT_PATH . "/controlleur/reponse/implReponseDAO.php";
