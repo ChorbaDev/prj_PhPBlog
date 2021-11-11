@@ -11,6 +11,7 @@ include_once ROOT_PATH . "/modele/reponse.php";
 $implRepDao = new implReponseDAO();
 $implSujetDao = new implSujetDAO();
 $implRedacDao = new ImplRedacteurDAO();
+if(isset($_SESSION['pseudo']))
 $idCo=$implRedacDao->getByPseudo($_SESSION['pseudo'])->getId();
 
 if (isset($_GET['id']) || $implSujetDao->getById($_GET['id'])->getPublie() === 1) {
@@ -48,7 +49,6 @@ if (isset($_GET['m'])) {
 
 
 } else if (isset($_GET['d'])){
-    $nRep = new reponse(0, $id, $implRedacDao->getByPseudo($_SESSION['pseudo'])->getId(), $date, $text);
     $implRepDao->delete($_GET['idRep']);
     header('Location: ' . $uri);
 } else {
@@ -160,7 +160,7 @@ if (isset($_GET['m'])) {
                                         <a href="<?php echo($uri . '&m&idRep=' . $idRep); ?>">Modifier</a>
                                     </div>
                                     <div class="modif">
-                                        <a href="<?php echo($uri . '&d&idRep=' . $idRep); ?>">Modifier</a>
+                                        <a href="<?php echo($uri . '&d&idRep=' . $idRep); ?>">Supprimer</a>
                                     </div>
                                 <?php endif; ?>
                             </div>

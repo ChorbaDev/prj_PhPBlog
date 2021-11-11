@@ -104,7 +104,7 @@ include ROOT_PATH."/vue/phpfiles/Resources/header.php";
                     $titre = $post->getTitreSujet();
                     $date = $post->getDateSujet();
                     $publie = $post->getPublie();
-                    $texte = substr($post->getTexteSujet(), 0, 300);
+                    $texte = substr($post->getTexteSujet(), 0, 200);
                     $image = $post->getImage();
                     $nomredac = $implRedacDao->getByID($post->getIdRedacteur())->getPseudo();
                     ?>
