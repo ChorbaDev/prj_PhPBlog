@@ -101,12 +101,12 @@ $reps = $implRepDao->findAll();
 
 
                     <div class="rep clearfix">
-                        <div class="rep__contenu">
-                            <?php echo $texteRep; ?>
-                        </div>
                         <div class="rep__info">
                             <i class="far fa-user"><?php echo $nomredacRep; ?></i>
                             <i class="far fa-calendar"><?php echo date(' j/n/Y', strtotime($dateRep)); ?></i>
+                        </div>
+                        <div class="rep__contenu">
+                            <?php echo $texteRep; ?>
                         </div>
                     </div>
                 </div>

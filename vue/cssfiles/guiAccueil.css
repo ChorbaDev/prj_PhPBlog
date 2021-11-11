@@ -28,12 +28,18 @@
 .wrapper .post:hover{
     transform: translate3d(0,-10px,0);
 }
+.wrapper .post .post__image{
+    width: 40%;
+    height: 100%;
+    float: left;
+}
 .wrapper .post .post__image img{
     display: block;
+    height: 100%;
     width: 100%;
-    max-height: 300px;
-    object-fit: cover;
+    border-radius: 1%;
 }
+
 .post__body{
     padding: 25px;
 }
