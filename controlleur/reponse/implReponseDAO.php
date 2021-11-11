@@ -44,7 +44,7 @@ class implReponseDAO implements ReponseDAO
         $result = $this->conn->connect()->query("select * from elloumi2u_blog.reponse");
         $arr = [];
         foreach ($result as $row) {
-            $reponse = new Reponse($row['id'],$row['idsujet'],$row['idredacteur'],$row['daterep'],$row['textereponse']);
+            $reponse = new Reponse($row['idreponse'],$row['idsujet'],$row['idredacteur'],$row['daterep'],$row['textereponse']);
             array_push($arr, $reponse);
         }
         return $arr;
@@ -54,7 +54,7 @@ class implReponseDAO implements ReponseDAO
     {
         $result = $this->conn->connect()->query("select * from elloumi2u_blog.reponse where idreponse=$id");
         $row = $result->fetch();
-        $reponse = new Reponse($row['id'],$row['idsujet'],$row['idredacteur'],$row['daterep'],$row['textereponse']);
+        $reponse = new Reponse($row['idreponse'],$row['idsujet'],$row['idredacteur'],$row['daterep'],$row['textereponse']);
         return $reponse;
     }
 
@@ -62,7 +62,7 @@ class implReponseDAO implements ReponseDAO
     {
         $result = $this->conn->connect()->query("select * from elloumi2u_blog.reponse where idsujet=$id");
         $row = $result->fetch();
-        $reponse = new Reponse($row['id'],$row['idsujet'],$row['idredacteur'],$row['daterep'],$row['textereponse']);
+        $reponse = new Reponse($row['idreponse'],$row['idsujet'],$row['idredacteur'],$row['daterep'],$row['textereponse']);
         return $reponse;
     }
 }
