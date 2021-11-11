@@ -8,7 +8,7 @@ include_once 'modele/sujet.php';
 $implSujetDao = new implSujetDAO();
 $posts = array();
 $implThemeDao = new implThemeDAO();
-$themes=$implThemeDao->findAll();
+$themes = $implThemeDao->findAll();
 $implRedacDao = new ImplRedacteurDAO();
 $titrePost = 'Dernières Publications';
 if (isset($_POST['recherche-mots'])) {
@@ -16,9 +16,9 @@ if (isset($_POST['recherche-mots'])) {
     $posts = $implSujetDao->rechercher($_POST['recherche-mots']);
 } else
     $posts = $implSujetDao->findAll();
-if(isset($_GET['th'])){
-    $theme=$_GET['th'];
-    $posts=$implSujetDao->getByTheme($theme);
+if (isset($_GET['th'])) {
+    $theme = $_GET['th'];
+    $posts = $implSujetDao->getByTheme($theme);
 }
 ?>
 <!doctype html>
@@ -48,7 +48,7 @@ if(isset($_GET['th'])){
 </head>
 <body>
 <?php
-include ROOT_PATH."/vue/phpfiles/Resources/header.php";
+include ROOT_PATH . "/vue/phpfiles/Resources/header.php";
 ?>
 <!--  Page Wrapper-->
 <div class="page-wrapper">
@@ -69,14 +69,14 @@ include ROOT_PATH."/vue/phpfiles/Resources/header.php";
                     <div class="post">
                         <div class="post__image">
                             <?php
-                            if($image)
-                            echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="" />';
+                            if ($image)
+                                echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="" />';
                             else echo "<img src='vue/images/placeholder.png' alt='' />";
                             ?>
                         </div>
                         <div class="post__body">
                             <div class="post__title">
-                                <a href="<?php echo (BASE_URL."/vue/phpfiles/Blog/viewBlog.php?id=".$id); ?>"><?php echo $titre; ?></a>
+                                <a href="<?php echo(BASE_URL . "/vue/phpfiles/Blog/viewBlog.php?id=" . $id); ?>"><?php echo $titre; ?></a>
                             </div>
                             <div class="post__desc">
                                 <div><i class="far fa-user"><?php echo $nomredac; ?></i>
@@ -111,17 +111,20 @@ include ROOT_PATH."/vue/phpfiles/Resources/header.php";
                     <div class="post clearfix">
                         <div class="post__image">
                             <?php
-                            if($image)
+                            if ($image)
                                 echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="" />';
                             else echo "<img src='vue/images/placeholder.png' alt='' />";
                             ?>
                         </div>
                         <div class="post__preview">
-                            <h2><a href="<?php echo (BASE_URL."/vue/phpfiles/Blog/viewBlog.php?id=".$id); ?>"><?php echo $titre; ?></a></h2>
+                            <h2>
+                                <a href="<?php echo(BASE_URL . "/vue/phpfiles/Blog/viewBlog.php?id=" . $id); ?>"><?php echo $titre; ?></a>
+                            </h2>
                             <i class="far fa-user"><?php echo $nomredac; ?></i>
                             <i class="far fa-calendar"><?php echo date(' j/n/Y', strtotime($date)); ?></i>
                             <p class="preview"><?php echo html_entity_decode($texte . '...') ?></p>
-                            <a href="<?php echo (BASE_URL."/vue/phpfiles/Blog/viewBlog.php?id=".$id); ?>" class="btn lire">Lire</a>
+                            <a href="<?php echo(BASE_URL . "/vue/phpfiles/Blog/viewBlog.php?id=" . $id); ?>"
+                               class="btn lire">Lire</a>
                         </div>
                     </div>
                 <?php
@@ -140,8 +143,8 @@ include ROOT_PATH."/vue/phpfiles/Resources/header.php";
                 <h2 class="section__titre">Thémes</h2>
                 <ul>
                     <?php
-                        foreach ($themes as $theme)
-                            echo '<li><a href=index.php?th='.$theme.'>'.$theme.'</a></li>';
+                    foreach ($themes as $theme)
+                        echo '<li><a href=index.php?th=' . $theme . '>' . $theme . '</a></li>';
                     ?>
                 </ul>
 

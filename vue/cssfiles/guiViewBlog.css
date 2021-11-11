@@ -5,28 +5,30 @@
 
 /* PAGE WRAPPER */
 
-.page-wrapper{
+.page-wrapper {
     padding: 0 50px 50px;
     overflow: hidden;
 }
 
 /* CONTENT */
 
-.content{
+.content {
 
     width: 100%;
     margin: 100px auto 30px;
 
 
 }
-.content .content__main{
+
+.content .content__main {
     width: 70%;
     float: left;
 
     background: #f5f2f2;
 
 }
-.content .content__main .sujet__wrapper,.rep__ajout__wrapper,.rep{
+
+.content .content__main .sujet__wrapper, .rep__ajout__wrapper, .rep {
     width: 95%;
     margin: 10px auto;
     padding-bottom: 10px;
@@ -35,52 +37,59 @@
     background: white;
 
 }
-.content .content__main .sujet__wrapper .sujet__titre{
+
+.content .content__main .sujet__wrapper .sujet__titre {
     width: 90%;
     padding: 0 0 5px 25px;
 }
-.content .content__main .sujet__info{
+
+.content .content__main .sujet__info {
     padding-left: 10px;
     margin-bottom: 16px;
 
 }
-.content .content__main .sujet__info,.rep__info i{
+
+.content .content__main .sujet__info, .rep__info i {
     color: gray;
     padding: 2px;
 }
 
-.content .content__main .sujet .sujet__image{
+.content .content__main .sujet .sujet__image {
     width: 40%;
     height: 100%;
     padding-left: 2%;
 
 }
-.content .content__main .sujet .sujet__image img{
+
+.content .content__main .sujet .sujet__image img {
     height: 100%;
     width: 100%;
     border-radius: 1%;
 
 }
 
-.content .content__main .sujet .sujet__contenu,.rep__ajout,.rep{
+.content .content__main .sujet .sujet__contenu, .rep__ajout, .rep {
     width: 95%;
     padding-top: 8px;
     margin-top: 16px;
     border-top: 1px solid lightgrey;
     margin-left: 1em;
 }
+
 /* RESPONSE */
-.content .content__main .reponse__wrapper .rep__ajout__wrapper>h2{
+.content .content__main .reponse__wrapper .rep__ajout__wrapper > h2 {
     padding-left: 10px;
 }
-.content .content__main .reponse__wrapper{
+
+.content .content__main .reponse__wrapper {
     width: 95%;
     margin: 10px auto;
     border-radius: 5px;
     background: white;
     padding-bottom: 10px;
 }
-.modif{
+
+.modif {
     float: right;
     background: #9a2914;
     border-radius: 1%;
@@ -88,7 +97,7 @@
     margin-right: 5px;
 }
 
-.modif a{
+.modif a {
     color: white;
     padding: 2px 2px 2px 2px;
 }

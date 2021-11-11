@@ -2,85 +2,97 @@
 
 /*Page wrapper*/
 
-.page-wrapper{
+.page-wrapper {
     padding: 0 50px 50px;
     overflow: hidden;
 }
 
 /* Post slider*/
-.title-slider{
+.title-slider {
     margin-top: 50px;
     font-size: 25px;
     font-weight: 700;
     margin-bottom: 25px;
 }
 
-.post{
+.post {
     margin: 10px;
     background-color: white;
-    box-shadow: 0 15px 35px #3232321a,0 5px 15px #0000001a ;
+    box-shadow: 0 15px 35px #3232321a, 0 5px 15px #0000001a;
     transition: transform 0.3s;
-    transform: translate3d(0,-1px,0);
+    transform: translate3d(0, -1px, 0);
 }
-.post a:hover{
+
+.post a:hover {
     color: #9a2914;
 }
-.wrapper .post:hover{
-    transform: translate3d(0,-10px,0);
+
+.wrapper .post:hover {
+    transform: translate3d(0, -10px, 0);
 }
-.wrapper .post{
+
+.wrapper .post {
     height: 100%;
 }
-.wrapper .post .post__image{
+
+.wrapper .post .post__image {
     width: 100%;
     height: 50%;
     object-fit: cover;
 }
-.wrapper .post .post__image img{
+
+.wrapper .post .post__image img {
     height: 100%;
     width: 100%;
     border-radius: 1%;
 }
 
-.post__body{
+.post__body {
     padding: 25px;
 }
-.post__title{
+
+.post__title {
     font-size: 24px;
     margin-bottom: 5px;
     font-weight: bold;
     color: #000;
 }
-.post__description{
+
+.post__description {
     color: #444444;
 }
-.posts{
+
+.posts {
     position: relative;
 }
 
 
 /*Carousel*/
 
-.carousel{
+.carousel {
     position: relative;
 }
-.carousel, .post{
+
+.carousel, .post {
     position: relative;
 }
-.carousel__wrapper{
+
+.carousel__wrapper {
     transition: transform .3s;
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
 }
-.carousel__wrapper::after{
+
+.carousel__wrapper::after {
     content: '';
     clear: both;
     display: table;
 }
+
 .carousel__post {
     float: left;
 }
 
-.carousel__next, .carousel__prev{
+.carousel__next, .carousel__prev {
     position: absolute;
     width: 40px;
     height: 40px;
@@ -90,19 +102,22 @@
     top: 50%;
     margin-top: -20px;
     right: 0;
-    box-shadow: 0 15px 35px #3232321a,0 5px 15px #0000001a ;
+    box-shadow: 0 15px 35px #3232321a, 0 5px 15px #0000001a;
     cursor: pointer;
     transition: transform 0.3s;
 }
-.carousel__next:hover, .carousel__prev:hover{
+
+.carousel__next:hover, .carousel__prev:hover {
     transform: scale(1.2);
 }
-.carousel__prev{
+
+.carousel__prev {
     background-image: url(../images/chevron-left-solid.svg);
     right: auto;
     left: -20px;
 }
-.carousel__pagination{
+
+.carousel__pagination {
     position: absolute;
     bottom: -5%;
     left: 0;
@@ -110,39 +125,42 @@
     text-align: center;
     display: block;
 }
-.carousel__pagination__button{
+
+.carousel__pagination__button {
     background-color: white;
     width: 10px;
     height: 10px;
     border-radius: 50%;
     display: inline-block;
-    margin:0 3px;
+    margin: 0 3px;
     box-shadow: 0 2px 5px #3232321a;
     transition: transform 0.3s;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-.carousel__pagination__button:hover{
+.carousel__pagination__button:hover {
     transform: scale(1.4);
 }
 
-.carousel__pagination__button--active{
+.carousel__pagination__button--active {
     transform: scale(1.4);
 }
+
 /*CONTENU post*/
-.content{
+.content {
 
     width: 100%;
     margin: 100px auto 30px;
 
 }
-.content .content__main{
+
+.content .content__main {
     width: 70%;
     float: left;
 
 }
 
-.content .content__main .post{
+.content .content__main .post {
     width: 95%;
     height: 270px;
     margin: 10px auto;
@@ -150,74 +168,86 @@
     background: white;
     position: relative;
 }
-.content .content__main .post .lire{
+
+.content .content__main .post .lire {
     position: absolute;
     bottom: 5%;
     right: 2%;
 }
-.content .content__main .post .lire:hover{
-    color:white;
+
+.content .content__main .post .lire:hover {
+    color: white;
 }
-.content .content__main .post .post__image{
+
+.content .content__main .post .post__image {
     width: 40%;
     height: 100%;
     float: left;
 }
-.content .content__main .post .post__image img{
+
+.content .content__main .post .post__image img {
     height: 100%;
     width: 100%;
     border-radius: 1%;
     object-fit: cover;
 }
-.content .content__main .post .post__preview{
+
+.content .content__main .post .post__preview {
     width: 60%;
     padding: 10px;
     float: right;
 }
-.content .content__main .post__titre__recent{
+
+.content .content__main .post__titre__recent {
     margin: 2% 2% 2% 5%;
 
 }
 
 /*CONTENU sidebar*/
-.content .sidebar{
+.content .sidebar {
     width: 30%;
     float: left;
     height: 300px;
 }
-.content .sidebar .section{
+
+.content .sidebar .section {
     background: white;
     padding: 20px;
     border-radius: 5px;
     margin-bottom: 20px;
 }
-.content .sidebar .section__titre{
+
+.content .sidebar .section__titre {
     margin: 4% 0 4% 0;
 }
-.content .sidebar .section.search{
+
+.content .sidebar .section.search {
     margin-top: 15%;
 
 }
-.content .sidebar .section.theme ul{
+
+.content .sidebar .section.theme ul {
     margin: 0;
     padding: 0;
     list-style: none;
     border-top: 1px solid lightgray;
 }
-.content .sidebar .section.theme ul li a{
+
+.content .sidebar .section.theme ul li a {
     display: block;
     padding: 3%;
-    border-bottom:1px solid lightgray;
+    border-bottom: 1px solid lightgray;
     transition: all .3s;
 }
-.content .sidebar .section.theme ul li a:hover{
+
+.content .sidebar .section.theme ul li a:hover {
     padding-left: 5%;
     transition: all .3s;
     color: #9a2914;
 }
 
 @media only screen and (max-width: 750px) {
-    .carousel__pagination{
+    .carousel__pagination {
         display: none;
     }
 

@@ -11,8 +11,8 @@ include_once ROOT_PATH . "/modele/reponse.php";
 $implRepDao = new implReponseDAO();
 $implSujetDao = new implSujetDAO();
 $implRedacDao = new ImplRedacteurDAO();
-if(isset($_SESSION['pseudo']))
-$idCo=$implRedacDao->getByPseudo($_SESSION['pseudo'])->getId();
+if (isset($_SESSION['pseudo']))
+    $idCo = $implRedacDao->getByPseudo($_SESSION['pseudo'])->getId();
 
 if (isset($_GET['id']) || $implSujetDao->getById($_GET['id'])->getPublie() === 1) {
     $post = $implSujetDao->getById($_GET['id']);
@@ -26,14 +26,14 @@ $date = $post->getDateSujet();
 $texte = $post->getTexteSujet();
 $image = $post->getImage();
 $nomredac = $implRedacDao->getByID($post->getIdRedacteur())->getPseudo();
-$uri = $_SERVER['PHP_SELF']."?id=$id";
+$uri = $_SERVER['PHP_SELF'] . "?id=$id";
 $posts = array();
 $reps = array();
 
 $posts = $implSujetDao->findAll();
 $reps = $implRepDao->findAll();
 if (isset($_GET['m'])) {
-    $placeHolderRep=$implRepDao->getByID($_GET['idRep'])->getTexteReponse();
+    $placeHolderRep = $implRepDao->getByID($_GET['idRep'])->getTexteReponse();
     if (isset($_POST['btn-post'])) {
         if (!isset($_SESSION['pseudo'])) {
             header("Location: " . BASE_URL . "/vue/phpfiles/Connexion/Login/login.php");
@@ -48,11 +48,11 @@ if (isset($_GET['m'])) {
     }
 
 
-} else if (isset($_GET['d'])){
+} else if (isset($_GET['d'])) {
     $implRepDao->delete($_GET['idRep']);
     header('Location: ' . $uri);
 } else {
-    $placeHolderRep='';
+    $placeHolderRep = '';
     if (isset($_POST['btn-post'])) {
         if (!isset($_SESSION['pseudo'])) {
             header("Location: " . BASE_URL . "/vue/phpfiles/Connexion/Login/login.php");
@@ -140,7 +140,7 @@ if (isset($_GET['m'])) {
                     <?php foreach ($reps as $rep):
                         if ($rep instanceof reponse && $rep->getIdSujet() == $id):
                             $idRep = $rep->getId();
-                            $idCoRep=$rep->getIdRedacteur();
+                            $idCoRep = $rep->getIdRedacteur();
                             $texteRep = $rep->getTexteReponse();
                             $dateRep = $rep->getDateRep();
                             $nomredacRep = $implRedacDao->getByID($rep->getIdRedacteur())->getPseudo();
@@ -155,14 +155,15 @@ if (isset($_GET['m'])) {
                                 <div class="rep__contenu">
                                     <?php echo $texteRep; ?>
                                 </div>
-                                <?php if ($idCo==$idCoRep): ?>
-                                    <div class="modif">
-                                        <a href="<?php echo($uri . '&m&idRep=' . $idRep); ?>">Modifier</a>
-                                    </div>
-                                    <div class="modif">
-                                        <a href="<?php echo($uri . '&d&idRep=' . $idRep); ?>">Supprimer</a>
-                                    </div>
-                                <?php endif; ?>
+                                <?php if (isset($_SESSION['pseudo'])):
+                                    if ($idCo == $idCoRep): ?>
+                                        <div class="modif">
+                                            <a href="<?php echo($uri . '&m&idRep=' . $idRep); ?>">Modifier</a>
+                                        </div>
+                                        <div class="modif">
+                                            <a href="<?php echo($uri . '&d&idRep=' . $idRep); ?>">Supprimer</a>
+                                        </div>
+                                    <?php endif; endif; ?>
                             </div>
                         <?php
                         endif;
