@@ -1,38 +1,41 @@
 <!doctype html>
 <?php
     session_start();
-    include_once "../../controlleur/sujet/implSujetDAO.php";
-    include_once "../../controlleur/theme/implThemeDAO.php";
-    include_once "../../controlleur/redacteur/implRedacteurDAO.php";
-    include_once "../../modele/sujet.php";
-    require_once "submitBlog.php";
+include_once "/home/elloumi2u/Projet/path.php";
+include_once ROOT_PATH."/controlleur/sujet/implSujetDAO.php";
+include_once ROOT_PATH."/controlleur/theme/implThemeDAO.php";
+include_once ROOT_PATH."/controlleur/redacteur/implRedacteurDAO.php";
+include_once ROOT_PATH."/modele/sujet.php";
+include_once "submitBlog.php";
 $retour=0;
 $implT=new ImplThemeDAO();
 $implS=new ImplSujetDAO();
 $implR=new ImplRedacteurDAO();
 $topics=$implT->findAll();
 if(isset($_GET['id']))
-    $id=$_GET['id'];
+    $idPost=$_GET['id'];
 $titre="";
 if(isset($_GET['s'])){
-    $implS->delete($id);
+    $implS->delete($idPost);
     $retour=1;
 }
 else if(isset($_GET['p'])){
-    $implS->changePublie($id);
+    $implS->changePublie($idPost);
     $retour=1;
 }
 else{
     $errors=array();
     $image="";
-    if(isset($_SESSION['pseudo']))
+    if(isset($_GET['idR']))
+        $idredacteur=$_GET['idR'];
+    else if(isset($_SESSION['pseudo']))
         $idredacteur=$implR->getByPseudo($_SESSION['pseudo'])->getId();
     $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
     $currentDate=$date->format('d-m-Y H:i:s');
     if(isset($_GET['m'])){
         $titre="Modification d'un blog";
         $btnValue="Modifier";
-        $post=$implS->getById($id);
+        $post=$implS->getById($idPost);
         $title=$post->getTitreSujet();
         $text=$post->getTexteSujet();
         $publier=$post->getPublie();
@@ -44,12 +47,28 @@ else{
             $publier=isset($_POST['published']);
             verifierChampsPost($errors, $title, $text, $topic_id);
             if (count($errors) == 0) {
-                unset($_POST["btn-post"]);
-                if(isset($_POST['image']))
-                $image =file_get_contents($_FILES['image']['tmp_name']);
-                $sujet = new Sujet(0, $idredacteur, $title, $text, $currentDate, $topic_id, $image, $publier);
-                $implS->update($id, $sujet);
-                header('Location: dashboard.php');
+                $extension=null;
+                if($_FILES['image']['error'] == UPLOAD_ERR_OK){
+                    $extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+                }
+                if($extension=='jpg' || $extension=='jpeg' || $extension=='png' || $extension=='gif'){
+                    $image =file_get_contents($_FILES['image']['tmp_name']);
+                    $sujet = new Sujet(0, $idredacteur, $title, $text, $currentDate, $topic_id, $image, $publier);
+                    $implS->update($idPost,$sujet);
+                    $location='Location: '.BASE_URL."/vue/phpfiles/Resources/dashboard.php?b";
+                    if(isset($_GET['idR']))
+                        $location=$location."&id=".$idredacteur;
+                    header($location);
+                }
+                else{
+                    $image=null;
+                    $sujet = new Sujet(0, $idredacteur, $title, $text, $currentDate, $topic_id, $image, $publier);
+                    $implS->update($idPost,$sujet);
+                    $location='Location: '.BASE_URL."/vue/phpfiles/Resources/dashboard.php?b";
+                    if(isset($_GET['idR']))
+                        $location=$location."&id=".$idredacteur;
+                    header($location);
+                }
             }
         }
     }else{
@@ -65,20 +84,40 @@ else{
             $topic_id=$_POST['topic_id'];
             $publier=isset($_POST['published']);
             verifierChampsPost($errors,$title,$text,$topic_id);
-            if(count($errors)==0){
-                unset($_POST["btn-post"]);
-                if(isset($_POST['image']))
-                $image =file_get_contents($_FILES['image']['tmp_name']);
-                $sujet=new Sujet(0,$idredacteur,$title,$text,$currentDate,$topic_id,$image,$publier);
-                $implS->create($sujet);
-                header('Location: dashboard.php');
+            if (count($errors) == 0) {
+                $extension=null;
+                if($_FILES['image']['error'] == UPLOAD_ERR_OK){
+                    $extension = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+                }
+                if($extension=='jpg' || $extension=='jpeg' || $extension=='png' || $extension=='gif'){
+                    $image =file_get_contents($_FILES['image']['tmp_name']);
+                    $sujet = new Sujet(0, $idredacteur, $title, $text, $currentDate, $topic_id, $image, $publier);
+                    $implS->create($sujet);
+                    $location='Location: '.BASE_URL."/vue/phpfiles/Resources/dashboard.php?b";
+                    if(isset($_GET['idR']))
+                        $location=$location."&id=".$idredacteur;
+                    header($location);
+                }
+                else{
+                    $image=null;
+                    $sujet = new Sujet(0, $idredacteur, $title, $text, $currentDate, $topic_id, $image, $publier);
+                    $implS->create($sujet);
+                    $location='Location: '.BASE_URL."/vue/phpfiles/Resources/dashboard.php?b";
+                    if(isset($_GET['idR']))
+                        $location=$location."&id=".$idredacteur;
+                    header($location);
+                }
             }
-        }
+            }
     }
 
 }
-if($retour==1)
-    header("Location: ".$_SESSION['url']);
+if($retour==1){
+    $location='Location: '.BASE_URL."/vue/phpfiles/Resources/dashboard.php?b";
+    if(isset($_GET['idR']))
+        $location=$location."&id=".$_GET['idR'];
+    header($location);
+}
 ?>
 
 <html lang="fr">
@@ -88,7 +127,7 @@ if($retour==1)
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?php echo $titre ?></title>
-<link rel="stylesheet" href="../cssfiles/guiEditBlog.css">
+<link rel="stylesheet" href="../../cssfiles/guiBlog.css">
 <!--    Font Awesome-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <!--    Google Fonts-->
@@ -98,7 +137,7 @@ if($retour==1)
 </head>
 <body>
 <?php
-include "header.php";
+include ROOT_PATH."/vue/phpfiles/Resources/header.php";
 ?>
 <?php if(count($errors) > 0):?>
 <div class="msg error">
@@ -128,7 +167,6 @@ include "header.php";
                     <select name="topic_id" class="text-input">
                         <option value=""></option>
                         <?php foreach ($topics as $topic): ?>
-
                                 <option <?php if (!empty($topic_id) && $topic_id == $topic) echo "selected" ?>
                                         value="<?php echo $topic ?>"><?php echo $topic ?></option>
                         <?php endforeach; ?>
@@ -148,14 +186,10 @@ include "header.php";
 
         </div>
 
-<!-- JQuery -->
-<!--<script-->
-<!--        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
 <!-- Ckeditor -->
-<script
-        src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
 <!-- Custom Script -->
-<script src="../javascriptfiles/textAreaScript.js"></script>
+<script src="../../javascriptfiles/textAreaScript.js"></script>
 
 </body>
 </html>

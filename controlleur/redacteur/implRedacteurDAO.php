@@ -1,7 +1,9 @@
 <?php
 include_once "RedacteurDAO.php";
-include_once "../../modele/connexion.php";
-include_once "../../modele/redacteur.php";
+include_once("/home/elloumi2u/Projet/path.php");
+include_once ROOT_PATH."/modele/connexion.php";
+include_once ROOT_PATH."/modele/redacteur.php";
+
 class ImplRedacteurDAO implements RedacteurDAO{
   private $conn;
   public function __construct(){
@@ -80,7 +82,7 @@ class ImplRedacteurDAO implements RedacteurDAO{
   {
     $result=$this->conn->connect()->query("select * from elloumi2u_blog.redacteur where pseudo='$pseudo'");
     $row=$result->fetch();
-    if($row['admin']!=null) return true;
+    if($row['admin']!=0) return true;
     return false;
   }
 }

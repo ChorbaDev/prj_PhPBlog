@@ -1,5 +1,5 @@
 @import "guiStyle.css";
-@import "CommunEntreFormulaire.css";
+@import "CommunEntre/formulaire.css";
 .form-content {
     width: 60%;
 }

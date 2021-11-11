@@ -1,6 +1,7 @@
 <?php
+include_once "/home/elloumi2u/Projet/path.php";
 include_once "ThemeDAO.php";
-include_once "../../modele/connexion.php";
+include_once ROOT_PATH."/modele/connexion.php";
 class ImplThemeDAO implements ThemeDAO{
   private $conn;
   public function __construct(){
@@ -29,5 +30,14 @@ class ImplThemeDAO implements ThemeDAO{
     foreach ($result as $row) array_push($arr,$row['theme']);
     return $arr;
   }
+
+    public function themeExiste($th){
+        $arr=$this->findAll();
+        foreach($arr as $theme){
+            if($theme==$th)
+                return true;
+        }
+        return false;
+    }
 }
 ?>

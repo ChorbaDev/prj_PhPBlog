@@ -61,3 +61,6 @@ td {
 .admin-wrapper .left-sidebar ul li a:hover {
     background: #7c2320;
 }
+.lien{
+    color: red;
+}

@@ -1,7 +1,8 @@
 <?php
 session_start();
-include_once "../../controlleur/redacteur/implRedacteurDAO.php";
-require_once "submitLogin.php";
+include_once("/home/elloumi2u/Projet/path.php");
+include_once ROOT_PATH."/controlleur/redacteur/implRedacteurDAO.php";
+include_once "submitLogin.php";
 $input='';
 $mdp='';
 $ok='';
@@ -17,8 +18,9 @@ if(isset($_POST['Connexion'])){
                 $_SESSION['pseudo']=$impl->getByMail($input)->getPseudo();
             else
                 $_SESSION['pseudo']=$input;
-                $_SESSION['admin']=$impl->isAdmin($_SESSION['pseudo']);
-            header('Location: accueil.php');
+            if($impl->isAdmin($_SESSION['pseudo']))
+                $_SESSION['admin']=1;
+            header('Location: '.BASE_URL.'/index.php');
         }
         else {
             array_push($errors,"Ce compte n'existe pas!");
@@ -38,12 +40,12 @@ if(isset($_POST['Connexion'])){
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
         <!--    CSS-->
-        <link rel="stylesheet" href="../cssfiles/guiFormulaireRedacteur.css">
+        <link rel="stylesheet" href="../../../cssfiles/guiFormulaireRedacteur.css">
   </head>
 
   <body>
   <?php
-    include "header.php";
+    include ROOT_PATH."/vue/phpfiles/Resources/header.php";
   ?>
 
   <?php if(!empty($ok)):?>
@@ -74,7 +76,7 @@ if(isset($_POST['Connexion'])){
           <div>
               <input type="submit" value="Connexion" name="Connexion" id="Connexion" class="btn">
           </div>
-          <p>Vous n'avez pas un compte? <a href="formulaireRedacteur.php?c">Créer un compte</a></p>
+          <p>Vous n'avez pas un compte? <a href="<?php echo BASE_URL; ?>/vue/phpfiles/Inscription_ModifRedact/formulaireRedacteur.php?c">Créer un compte</a></p>
       </form>
   </div>
   </body>

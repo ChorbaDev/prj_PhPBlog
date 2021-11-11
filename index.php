@@ -1,9 +1,9 @@
-<!doctype html>
 <?php
 session_start();
-include_once '../../controlleur/sujet/implSujetDAO.php';
-include_once '../../controlleur/redacteur/implRedacteurDAO.php';
-include_once '../../modele/sujet.php';
+include_once "path.php";
+include_once 'controlleur/sujet/implSujetDAO.php';
+include_once 'controlleur/redacteur/implRedacteurDAO.php';
+include_once 'modele/sujet.php';
 $implSujetDao = new implSujetDAO();
 $posts=array();
 $implRedacDao=new ImplRedacteurDAO();
@@ -15,6 +15,7 @@ if(isset($_POST['recherche-mots'])){
 else
     $posts = $implSujetDao->findAll();
 ?>
+<!doctype html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -35,15 +36,13 @@ else
           rel="stylesheet">
 
     <!--    CSS-->
-    <link rel="stylesheet" href="../cssfiles/guiAccueil.css">
+    <link rel="stylesheet" href="vue/cssfiles/guiAccueil.css">
     <!--    JS-->
-    <script type="text/javascript" src="../javascriptfiles/includeHTML.js"></script>
-
-    <script type="text/javascript" src="../javascriptfiles/carouselScript.js" async></script>
+    <script type="text/javascript" src="vue/javascriptfiles/carouselScript.js" async></script>
 </head>
 <body>
 <?php
-include "header.php";
+include ROOT_PATH."/vue/phpfiles/Resources/header.php";
 ?>
 <!--  Page Wrapper-->
 <div class="page-wrapper">
@@ -58,11 +57,14 @@ include "header.php";
                     $texte=substr($post->getTexteSujet(),0,100);
                     $image=$post->getImage();
                     $nomredac=$implRedacDao->getByID($post->getIdRedacteur())->getPseudo();
-
                     ?>
                     <div class="post">
                         <div class="post__image">
-                            <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="" />'; ?>
+                            <?php
+                            if($image)
+                            echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="" />';
+                            else echo "<img src='vue/images/placeholder.png' alt='' />";
+                            ?>
                         </div>
                         <div class="post__body">
                             <div class="post__title"><?php echo $titre; ?></div>
@@ -78,7 +80,6 @@ include "header.php";
                 endif;
             endforeach;
             ?>
-
         </div>
     </div>
     <!--        Fin Carousel-->
@@ -98,7 +99,11 @@ include "header.php";
             ?>
             <div class="post clearfix">
                 <div class="post__image">
-                    <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="" />'; ?>
+                    <?php
+                    if($image)
+                        echo '<img src="data:image/jpeg;base64,' . base64_encode($image) . '" alt="" />';
+                    else echo "<img src='vue/images/placeholder.png' alt='' />";
+                    ?>
                 </div>
                 <div class="post__preview">
                     <h2><a href=""><?php echo $titre; ?></a></h2>
@@ -138,7 +143,4 @@ include "header.php";
 </div>
 <!--  Fin Page Wrapper-->
 </body>
-<script>
-    includeHTML();
-</script>
 </html>

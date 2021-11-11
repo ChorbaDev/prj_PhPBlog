@@ -1,5 +1,6 @@
 <?php
-include_once 'DAO.php';
+include_once "/home/elloumi2u/Projet/path.php";
+include_once ROOT_PATH."/controlleur/DAO.php";
 interface RedacteurDAO extends dao
 {
   public function findAll();

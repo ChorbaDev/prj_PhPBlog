@@ -1,6 +1,7 @@
 <?php
-include_once "DAO.php";
-interface SujetDAO extends daof
+include_once "/home/elloumi2u/Projet/path.php";
+include_once ROOT_PATH."/controlleur/DAO.php";
+interface SujetDAO extends dao
 {
     public function findAll();
     public function getById($id);
