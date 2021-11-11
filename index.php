@@ -105,6 +105,7 @@ include ROOT_PATH . "/vue/phpfiles/Resources/header.php";
         <div class="content__main">
             <h1 class="post__titre__recent"><?php echo $titrePost ?></h1>
             <?php
+
             if($noGET)
             $posts=$implSujetDao->trending();
             foreach ($posts as $post):
