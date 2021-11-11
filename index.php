@@ -2,10 +2,13 @@
 session_start();
 include_once "path.php";
 include_once 'controlleur/sujet/implSujetDAO.php';
+include_once 'controlleur/theme/implThemeDAO.php';
 include_once 'controlleur/redacteur/implRedacteurDAO.php';
 include_once 'modele/sujet.php';
 $implSujetDao = new implSujetDAO();
 $posts = array();
+$implThemeDao = new implThemeDAO();
+$themes=$implThemeDao->findAll();
 $implRedacDao = new ImplRedacteurDAO();
 $titrePost = 'Dernières Publications';
 if (isset($_POST['recherche-mots'])) {
@@ -13,6 +16,10 @@ if (isset($_POST['recherche-mots'])) {
     $posts = $implSujetDao->rechercher($_POST['recherche-mots']);
 } else
     $posts = $implSujetDao->findAll();
+if(isset($_GET['th'])){
+    $theme=$_GET['th'];
+    $posts=$implSujetDao->getByTheme($theme);
+}
 ?>
 <!doctype html>
 <html lang="fr">
@@ -130,14 +137,12 @@ include ROOT_PATH."/vue/phpfiles/Resources/header.php";
 
             </div>
             <div class="section theme">
-                <h2 class="section__titre">Sujets</h2>
+                <h2 class="section__titre">Thémes</h2>
                 <ul>
-                    <li><a href="">1</a></li>
-                    <li><a href="">2</a></li>
-                    <li><a href="">3</a></li>
-                    <li><a href="">4</a></li>
-                    <li><a href="">5</a></li>
-                    <li><a href="">6</a></li>
+                    <?php
+                        foreach ($themes as $theme)
+                            echo '<li><a href=index.php?th='.$theme.'>'.$theme.'</a></li>';
+                    ?>
                 </ul>
 
             </div>

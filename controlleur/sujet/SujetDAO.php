@@ -8,6 +8,7 @@ interface SujetDAO extends dao
     public function getByIdRedacteur($id);
     public function changePublie($id);
     public function rechercher($str);
+    public function getByTheme($str);
 }
 
 ?>
