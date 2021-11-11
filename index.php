@@ -140,7 +140,7 @@ include ROOT_PATH . "/vue/phpfiles/Resources/header.php";
 
             </div>
             <div class="section theme">
-                <h2 class="section__titre">Thémes</h2>
+                <h2 class="section__titre">Thèmes</h2>
                 <ul>
                     <?php
                     foreach ($themes as $theme)

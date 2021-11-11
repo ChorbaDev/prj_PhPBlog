@@ -6,11 +6,13 @@ include_once ROOT_PATH . "/controlleur/redacteur/implRedacteurDAO.php";
 include_once ROOT_PATH . "/controlleur/reponse/implReponseDAO.php";
 include_once ROOT_PATH . "/modele/sujet.php";
 include_once ROOT_PATH . "/modele/reponse.php";
+include_once ROOT_PATH . '/controlleur/theme/implThemeDAO.php';
 
 
 $implRepDao = new implReponseDAO();
 $implSujetDao = new implSujetDAO();
 $implRedacDao = new ImplRedacteurDAO();
+$implThemeDao = new implThemeDAO();
 if (isset($_SESSION['pseudo']))
     $idCo = $implRedacDao->getByPseudo($_SESSION['pseudo'])->getId();
 
@@ -32,6 +34,10 @@ $reps = array();
 
 $posts = $implSujetDao->findAll();
 $reps = $implRepDao->findAll();
+if (isset($_GET['th'])) {
+    $theme = $_GET['th'];
+    $posts = $implSujetDao->getByTheme($theme);
+}
 if (isset($_GET['m'])) {
     $placeHolderRep = $implRepDao->getByID($_GET['idRep'])->getTexteReponse();
     if (isset($_POST['btn-post'])) {
@@ -172,6 +178,19 @@ if (isset($_GET['m'])) {
                 </div>
 
 
+            </div>
+            <div class="sidebar">
+                <div class="section sim">
+                    <h2 class="section__titre">Autres sujets similaires</h2>
+                    <ul>
+                        <?php
+                        foreach ($posts as $postsim)
+                            if ($postsim instanceof sujet && $postsim->getPublie() == 1)
+                            echo '<li><a href='.BASE_URL.'/vue/phpfiles/Blog/viewBlog.php?id=' .$postsim->getId(). '>' . substr($postsim->getTitreSujet(),0,50) . '</a></li>';
+                        ?>
+                    </ul>
+
+                </div>
             </div>
         </div>
     </div>
