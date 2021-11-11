@@ -1,0 +1,65 @@
+@import "guiStyle.css";
+
+
+/* PAGE WRAPPER */
+
+.page-wrapper{
+    padding: 0 50px 50px;
+    overflow: hidden;
+}
+
+/* CONTENT */
+
+.content{
+
+    width: 100%;
+    margin: 100px auto 30px;
+    border: 1px solid red;
+
+}
+.content .content__main{
+    width: 70%;
+    float: left;
+    border: 1px solid red;
+
+}
+.content .content__main .sujet__wrapper{
+    width: 95%;
+    margin: 10px auto;
+    border-radius: 5px;
+    background: white;
+    border: 1px solid red;
+}
+.content .content__main .sujet__wrapper .sujet__titre{
+    width: 90%;
+    padding: 0 0 5px 25px;
+}
+.content .content__main .sujet__info{
+    padding-left: 10px;
+    margin-bottom: 16px;
+
+}
+.content .content__main .sujet__info i{
+    color: gray;
+    padding: 2px;
+}
+
+.content .content__main .sujet .sujet__image{
+    width: 40%;
+    height: 100%;
+    border: 1px solid red;
+}
+.content .content__main .sujet .sujet__image img{
+    height: 100%;
+    width: 100%;
+    border-radius: 1%;
+    border: 1px solid red;
+}
+
+.content .content__main .sujet .sujet__contenu{
+    width: 95%;
+    padding-top: 8px;
+    margin-top: 16px;
+    border-top: 1px solid lightgrey;
+    margin-left: 1em;
+}
