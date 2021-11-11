@@ -31,7 +31,7 @@
 .wrapper .post .post__image{
     width: 40%;
     height: 100%;
-    float: left;
+    float: top;
 }
 .wrapper .post .post__image img{
     height: 100%;
