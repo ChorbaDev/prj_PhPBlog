@@ -94,5 +94,18 @@ class implSujetDAO implements SujetDAO{
         }
         return $arrRedacteur;
     }
+
+    public function getByTheme($str)
+    {
+        $arrTheme = [];
+        $arr = $this->findAll();
+        foreach ($arr as $post){
+            if($post instanceof sujet){
+                if($post->getTheme()==$str)
+                    array_push($arrTheme,$post);
+            }
+        }
+        return $arrTheme;
+    }
 }
 ?>
