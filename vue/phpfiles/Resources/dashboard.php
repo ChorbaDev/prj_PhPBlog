@@ -58,6 +58,7 @@ include_once "header.php";
         if(isset($_SESSION['admin']))
             include_once ROOT_PATH."/vue/phpfiles/Admin/adminSideBar.php";
         ?>
+
 <table>
     <thead>
     <tr>
@@ -135,6 +136,15 @@ include_once "header.php";
         endforeach;
     endif;
     ?>
+    <tr>
+        <td colspan="6">
+            <?php
+            if(!isset($_SESSION['admin'])){
+                echo '<a class="btn btnAj" href="'.BASE_URL.'/vue/phpfiles/Blog/editBlog.php">Ajouter un blog</a>';
+            }
+            ?>
+        </td>
+    </tr>
     </tbody>
 </table>
 </div>
