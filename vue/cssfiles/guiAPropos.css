@@ -1,0 +1,9 @@
+@import "guiStyle.css";
+
+.center{
+    padding-left: 50px;
+    margin: 0;
+}
+.page-wrapper{
+    padding-top: 100px;
+}

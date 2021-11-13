@@ -10,12 +10,13 @@ $posts = array();
 $implThemeDao = new implThemeDAO();
 $themes=$implThemeDao->findAll();
 $implRedacDao = new ImplRedacteurDAO();
-$titrePost = 'Dernières Publications';
+$titrePost = 'Publications en tendance';
 $noGET=true;
 if (isset($_POST['recherche-mots'])) {
     $noGET=false;
     $titrePost = 'Résultat de recherche pour : ' . $_POST['recherche-mots'];
     $posts = $implSujetDao->rechercher($_POST['recherche-mots']);
+    $r=$_POST['recherche-mots'];
 } else
     $posts = $implSujetDao->findAll();
 $theme=null;
@@ -23,6 +24,7 @@ if(isset($_GET['th'])){
     $noGET=false;
     $theme=$_GET['th'];
     $posts=$implSujetDao->getByTheme($theme);
+    $titrePost="Publications";
 }
 ?>
 <!doctype html>
@@ -66,6 +68,7 @@ include ROOT_PATH . "/vue/phpfiles/Resources/header.php";
                 if ($post instanceof sujet && $post->getPublie() == 1):
                     $id = $post->getId();
                     $titre = $post->getTitreSujet();
+                    $theme=$post->getTheme();
                     $date = $post->getDateSujet();
                     $texte = substr($post->getTexteSujet(), 0, 100);
                     $image = $post->getImage();
@@ -87,6 +90,7 @@ include ROOT_PATH . "/vue/phpfiles/Resources/header.php";
                             <div class="post__desc">
                                 <div><i class="far fa-user"><?php echo $nomredac; ?></i>
                                     <i class="far fa-calendar"><?php echo date(' j/n/Y', strtotime($date)); ?></i>
+                                    <i class="fas fa-palette"><?php echo $theme; ?></i>
                                 </div>
                                 <?php echo html_entity_decode($texte . '...') ?>
                             </div>
@@ -132,6 +136,7 @@ include ROOT_PATH . "/vue/phpfiles/Resources/header.php";
                             </h2>
                             <i class="far fa-user"><?php echo $nomredac; ?></i>
                             <i class="far fa-calendar"><?php echo date(' j/n/Y', strtotime($date)); ?></i>
+                            <i class="fas fa-palette"><?php echo $theme; ?></i>
                             <p class="preview"><?php echo html_entity_decode($texte . '...') ?></p>
                             <a href="<?php echo(BASE_URL . "/vue/phpfiles/Blog/viewBlog.php?id=" . $id); ?>"
                                class="btn lire">Lire</a>

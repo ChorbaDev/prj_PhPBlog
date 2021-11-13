@@ -16,31 +16,31 @@ if(isset($_GET['s'])){
     $retour=1;
 }
 else if(isset($_GET['m'])){
-    $titre="Modification d'un théme";
+    $titre="Modification d'un thème";
     $btnValue="Modifier";
     $lib=$_GET['th'];
     $ancLib=$lib;
     if(isset($_POST['submit'])){
         $lib=$_POST['lib'];
-        if(empty($lib)) array_push($errors,"Saisissez la libelle");
-        else if($implT->themeExiste($lib)) array_push($errors,"Ce théme existe déja");
+        if(empty($lib)) array_push($errors,"Saisissez le libellé");
+        else if($implT->themeExiste($lib)) array_push($errors,"Ce thème existe déjà");
         else{
             $implT->update($ancLib,$lib);
-            $ok="Modification avec succées!";
+            $ok="Modification avec succès!";
             header('Refresh: 2; URL= '.BASE_URL.'/vue/phpfiles/Resources/dashboard.php?t');
         }
     }
 }
 else{
-    $titre="Ajout d'un théme";
+    $titre="Ajout d'un thème";
     $btnValue="Ajouter";
     if(isset($_POST['submit'])){
         $lib=$_POST['lib'];
         if(empty($lib)) array_push($errors,"Saisissez la libelle");
-        else if($implT->themeExiste($lib)) array_push($errors,"Ce théme existe déja");
+        else if($implT->themeExiste($lib)) array_push($errors,"Ce thème existe déjà");
         else{
             $implT->create($lib);
-            $ok="Ajout avec succées!";
+            $ok="Ajout avec succès!";
             header('Refresh: 2; URL= '.BASE_URL.'/vue/phpfiles/Resources/dashboard.php?t');
         }
     }

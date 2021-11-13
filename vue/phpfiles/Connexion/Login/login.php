@@ -76,7 +76,7 @@ if(isset($_POST['Connexion'])){
           <div>
               <input type="submit" value="Connexion" name="Connexion" id="Connexion" class="btn">
           </div>
-          <p>Vous n'avez pas un compte? <a href="<?php echo BASE_URL; ?>/vue/phpfiles/Inscription_ModifRedact/formulaireRedacteur.php?c">Créer un compte</a></p>
+          <p>Vous n'avez pas de compte? <a href="<?php echo BASE_URL; ?>/vue/phpfiles/Inscription_ModifRedact/formulaireRedacteur.php?c">Créer un compte</a></p>
       </form>
   </div>
   </body>

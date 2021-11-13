@@ -16,13 +16,13 @@
         $posts=$impl->getByIdRedacteur($id);
         array_push($listTH,"<th>Titre</th>");
         array_push($listTH,"<th>Date</th>");
-        array_push($listTH,"<th>théme</th>");
+        array_push($listTH,"<th>Thème</th>");
         array_push($listTH,"<th colspan='3'>Action</th>");
     }
     if(isset($_GET['t'])){
         $_SESSION['url']='dashboard.php?t';
         $themes=$implT->findAll();
-        array_push($listTH,"<th>Libelle</th>");
+        array_push($listTH,"<th>Libellé</th>");
         array_push($listTH,"<th colspan='2'>Action</th>");
     }
     if(isset($_GET['r'])){

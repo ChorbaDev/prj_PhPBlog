@@ -27,6 +27,11 @@ header .nav {
 
 header * {
     color: white;
+
+}
+
+.drop__down{
+    z-index: 999 !important;
 }
 
 header h1 i {

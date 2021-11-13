@@ -24,7 +24,7 @@ if(isset($_GET['ad'])){
     header('Location: '.BASE_URL.'/vue/phpfiles/Resources/dashboard.php?r');
 }
 else if(isset($_GET['p'])){
-    $titrePage="Paramétre";
+    $titrePage="Paramètre";
     $btnValue="Modifier";
     $impl=new ImplRedacteurDAO();
     if(isset($_GET['id'])){
@@ -55,21 +55,21 @@ else if(isset($_GET['p'])){
             $impl=new ImplRedacteurDAO();
             if($redacteur->getMail()!=$mail  || $redacteur->getPseudo()!=$pseudo){
                 if($redacteur->getMail()!=$mail && $impl->getByMail($mail)!=NULL) {
-                    array_push($errors,'Cette mail existe déja!');
+                    array_push($errors,'Ce mail existe déjà!');
                 }else if($redacteur->getPseudo()!=$pseudo && $impl->getByPseudo($pseudo)!=NULL){
-                    array_push($errors,'Ce pseudo existe déja!');
+                    array_push($errors,'Ce pseudo existe déjà!');
                 }
                 else{
                     $impl->update($redacteur->getId(),$redacteur2);
                     if(!isset($_GET['id']))
                     $_SESSION['pseudo']=$pseudo;
-                    $ok="Modification avec succées";
+                    $ok="Modification avec succès";
                     header('Refresh: 2; URL='.$_SESSION['url']);
                 }
             }
             else{
                 $impl->update($redacteur->getId(),$redacteur2);
-                $ok="Modification avec succées";
+                $ok="Modification avec succès";
                 if(!isset($_GET['id']))
                 $_SESSION['pseudo']=$pseudo;
                 header('Refresh: 2; URL='.$_SESSION['url']);
@@ -92,9 +92,9 @@ if(isset($_POST["btn"])){
         $redacteur=new Redacteur(0,$nom,$prenom,$mail,$mdp,$pseudo);
         $impl=new ImplRedacteurDAO();
             if($impl->getByMail($mail)!=NULL) {
-                array_push($errors,'Cette mail existe déja!');
+                array_push($errors,'Cette mail existe déjà!');
             }else if($impl->getByPseudo($pseudo)!=NULL){
-                array_push($errors,'Ce pseudo existe déja!');
+                array_push($errors,'Ce pseudo existe déjà!');
             }
             else{
                 $impl->create($redacteur);
@@ -102,7 +102,7 @@ if(isset($_POST["btn"])){
                 if(isset($_GET['admin'])){
                     $location=BASE_URL."/vue/phpfiles/Resources/dashboard.php?r";
                 }else $_SESSION['pseudo']=$pseudo;
-                $ok="Création avec succées";
+                $ok="Création avec succès";
                 header('Refresh: 2; URL='.$location);
             }
     }
@@ -167,7 +167,7 @@ include ROOT_PATH."/vue/phpfiles/Resources/header.php";
             <input type="password" id="mdp" name="mdp" class="text-input">
         </div>
         <div class="form-control">
-            <label>Confirmation de Mot de passe</label>
+            <label>Confirmation du Mot de passe</label>
             <input type="password" id="mdpConf" name="mdpC" class="text-input">
         </div>
         <div>
