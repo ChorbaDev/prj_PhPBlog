@@ -7,9 +7,9 @@ class connexion {
      public function connect(){
           $host='mysql:host=devbdd.iutmetz.univ-lorraine.fr';
           $port='port=3306';
-          $user='elloumi2u_appli';
-          $pw='32024561';
-          $db='elloumi2u_blog';
+          $user='';
+          $pw='';
+          $db='';
           try{
                self::$pdo =new PDO($host.';'.$port.';'.$db,$user,$pw);
                self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
